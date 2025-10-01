@@ -54,6 +54,21 @@ module.exports = {
                                 '5': 'hsl(var(--chart-5))'
                         }
                 },
+                fontFamily: {
+                        'arabic': ['Cairo', 'Tajawal', 'system-ui', 'sans-serif'],
+                },
+                backdropBlur: {
+                        xs: '2px',
+                },
+                transitionDelay: {
+                        '100': '100ms',
+                        '200': '200ms',
+                        '300': '300ms',
+                        '400': '400ms',
+                        '500': '500ms',
+                        '700': '700ms',
+                        '1000': '1000ms',
+                },
                 keyframes: {
                         'accordion-down': {
                                 from: {
