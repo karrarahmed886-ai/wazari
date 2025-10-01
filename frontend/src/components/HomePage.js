@@ -68,12 +68,6 @@ const HomePage = () => {
             </div>
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <button 
-                onClick={() => navigate('/admin')}
-                className="px-4 py-2 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:shadow-md transition-all duration-300 text-sm font-medium"
-              >
-                لوحة الإدارة
-              </button>
             </div>
           </div>
         </div>
