@@ -121,7 +121,8 @@ async def get_grades():
         "grades": [
             {"id": "sixth_primary", "name": "السادس ابتدائي", "value": GradeType.SIXTH_PRIMARY},
             {"id": "third_intermediate", "name": "الثالث متوسط", "value": GradeType.THIRD_INTERMEDIATE},
-            {"id": "sixth_preparatory", "name": "السادس إعدادي", "value": GradeType.SIXTH_PREPARATORY}
+            {"id": "sixth_preparatory_scientific", "name": "السادس إعدادي - علمي", "value": GradeType.SIXTH_PREPARATORY_SCIENTIFIC},
+            {"id": "sixth_preparatory_literary", "name": "السادس إعدادي - أدبي", "value": GradeType.SIXTH_PREPARATORY_LITERARY}
         ]
     }
 
