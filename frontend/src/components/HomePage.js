@@ -68,6 +68,12 @@ const HomePage = () => {
             </div>
             <div className="flex items-center space-x-4">
               <ThemeToggle />
+              {/* Admin access - only visible to admin */}
+              <div 
+                onDoubleClick={() => navigate('/admin')}
+                className="w-8 h-8 cursor-pointer opacity-0 hover:opacity-30 transition-opacity duration-300"
+                title="إدارة (نقر مزدوج)"
+              />
             </div>
           </div>
         </div>
