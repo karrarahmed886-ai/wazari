@@ -29,7 +29,8 @@ api_router = APIRouter(prefix="/api")
 class GradeType(str, Enum):
     SIXTH_PRIMARY = "السادس ابتدائي"
     THIRD_INTERMEDIATE = "الثالث متوسط"
-    SIXTH_PREPARATORY = "السادس إعدادي"
+    SIXTH_PREPARATORY_SCIENTIFIC = "السادس إعدادي - علمي"
+    SIXTH_PREPARATORY_LITERARY = "السادس إعدادي - أدبي"
 
 class OrderStatus(str, Enum):
     PENDING = "pending"
