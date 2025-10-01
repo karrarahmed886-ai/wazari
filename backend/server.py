@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -6,10 +6,10 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 import uuid
 from datetime import datetime
-
+from enum import Enum
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -25,32 +25,192 @@ app = FastAPI()
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+# Enums
+class GradeType(str, Enum):
+    SIXTH_PRIMARY = "السادس ابتدائي"
+    THIRD_INTERMEDIATE = "الثالث متوسط"
+    SIXTH_PREPARATORY = "السادس إعدادي"
 
-# Define Models
-class StatusCheck(BaseModel):
+class OrderStatus(str, Enum):
+    PENDING = "pending"
+    CONFIRMED = "confirmed"
+    REJECTED = "rejected"
+
+class PurchaseType(str, Enum):
+    SINGLE_SUBJECT = "single"
+    ALL_SUBJECTS = "all"
+
+# Models
+class Subject(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    name: str
+    grade: GradeType
+    image_urls: List[str] = []
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
+class SubjectCreate(BaseModel):
+    name: str
+    grade: GradeType
+    image_urls: List[str] = []
 
-# Add your routes to the router instead of directly to app
+class Order(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    student_name: str
+    telegram_username: str
+    phone_number: str
+    grade: GradeType
+    purchase_type: PurchaseType
+    selected_subjects: List[str] = []  # Subject IDs for single purchases
+    card_number: str
+    total_amount: int  # in USD
+    status: OrderStatus = OrderStatus.PENDING
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    confirmed_at: Optional[datetime] = None
+
+class OrderCreate(BaseModel):
+    student_name: str
+    telegram_username: str
+    phone_number: str
+    grade: GradeType
+    purchase_type: PurchaseType
+    selected_subjects: List[str] = []
+    card_number: str
+
+class OrderUpdate(BaseModel):
+    status: OrderStatus
+    admin_notes: Optional[str] = None
+
+# Default subjects for each grade
+DEFAULT_SUBJECTS = {
+    GradeType.SIXTH_PRIMARY: [
+        "الرياضيات", "اللغة العربية", "اللغة الإنجليزية", "العلوم", 
+        "التاريخ", "الجغرافيا", "التربية الإسلامية"
+    ],
+    GradeType.THIRD_INTERMEDIATE: [
+        "الرياضيات", "اللغة العربية", "اللغة الإنجليزية", "الفيزياء", 
+        "الكيمياء", "الأحياء", "التاريخ", "الجغرافيا", "التربية الإسلامية"
+    ],
+    GradeType.SIXTH_PREPARATORY: [
+        "الرياضيات", "اللغة العربية", "اللغة الإنجليزية", "الفيزياء", 
+        "الكيمياء", "الأحياء", "التاريخ", "الجغرافيا", "التربية الإسلامية"
+    ]
+}
+
+# Initialize default subjects
+async def init_default_subjects():
+    existing_subjects = await db.subjects.find().to_list(1000)
+    if not existing_subjects:
+        for grade, subjects in DEFAULT_SUBJECTS.items():
+            for subject_name in subjects:
+                subject = Subject(name=subject_name, grade=grade)
+                await db.subjects.insert_one(subject.dict())
+
+# Routes
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "مرحباً بك في موقع الأسئلة الوزارية"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
+@api_router.get("/grades")
+async def get_grades():
+    return {
+        "grades": [
+            {"id": "sixth_primary", "name": "السادس ابتدائي", "value": GradeType.SIXTH_PRIMARY},
+            {"id": "third_intermediate", "name": "الثالث متوسط", "value": GradeType.THIRD_INTERMEDIATE},
+            {"id": "sixth_preparatory", "name": "السادس إعدادي", "value": GradeType.SIXTH_PREPARATORY}
+        ]
+    }
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
+@api_router.get("/subjects/{grade}")
+async def get_subjects(grade: GradeType):
+    subjects = await db.subjects.find({"grade": grade}).to_list(1000)
+    return [Subject(**subject) for subject in subjects]
+
+@api_router.get("/pricing")
+async def get_pricing():
+    return {
+        "single_subject": {
+            "price": 10,
+            "currency": "USD",
+            "description": "مادة واحدة - كارت رصيد 10$"
+        },
+        "all_subjects": {
+            "price": 50,
+            "currency": "USD", 
+            "description": "جميع المواد - كارت رصيد 50$"
+        }
+    }
+
+@api_router.post("/orders", response_model=Order)
+async def create_order(order_data: OrderCreate):
+    # Calculate total amount
+    if order_data.purchase_type == PurchaseType.SINGLE_SUBJECT:
+        total_amount = len(order_data.selected_subjects) * 10
+    else:
+        total_amount = 50
+    
+    # Create order
+    order = Order(
+        **order_data.dict(),
+        total_amount=total_amount
+    )
+    
+    await db.orders.insert_one(order.dict())
+    return order
+
+@api_router.get("/orders", response_model=List[Order])
+async def get_orders(status: Optional[OrderStatus] = None):
+    query = {}
+    if status:
+        query["status"] = status
+    
+    orders = await db.orders.find(query).sort("created_at", -1).to_list(1000)
+    return [Order(**order) for order in orders]
+
+@api_router.put("/orders/{order_id}")
+async def update_order(order_id: str, update_data: OrderUpdate):
+    update_dict = update_data.dict(exclude_unset=True)
+    
+    if update_data.status == OrderStatus.CONFIRMED:
+        update_dict["confirmed_at"] = datetime.utcnow()
+    
+    result = await db.orders.update_one(
+        {"id": order_id}, 
+        {"$set": update_dict}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Order not found")
+    
+    # Get updated order
+    updated_order = await db.orders.find_one({"id": order_id})
+    return Order(**updated_order)
+
+@api_router.get("/orders/{order_id}")
+async def get_order(order_id: str):
+    order = await db.orders.find_one({"id": order_id})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return Order(**order)
+
+# Subject management (for admin)
+@api_router.post("/subjects", response_model=Subject)
+async def create_subject(subject_data: SubjectCreate):
+    subject = Subject(**subject_data.dict())
+    await db.subjects.insert_one(subject.dict())
+    return subject
+
+@api_router.put("/subjects/{subject_id}")
+async def update_subject(subject_id: str, subject_data: SubjectCreate):
+    result = await db.subjects.update_one(
+        {"id": subject_id},
+        {"$set": subject_data.dict()}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Subject not found")
+    
+    updated_subject = await db.subjects.find_one({"id": subject_id})
+    return Subject(**updated_subject)
 
 # Include the router in the main app
 app.include_router(api_router)
@@ -69,6 +229,11 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+@app.on_event("startup")
+async def startup_event():
+    await init_default_subjects()
+    logger.info("Application started successfully")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
