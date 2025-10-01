@@ -128,7 +128,15 @@ module.exports = {
                 },
                 animation: {
                         'accordion-down': 'accordion-down 0.2s ease-out',
-                        'accordion-up': 'accordion-up 0.2s ease-out'
+                        'accordion-up': 'accordion-up 0.2s ease-out',
+                        'fadeInUp': 'fadeInUp 0.8s ease-out',
+                        'fadeInDown': 'fadeInDown 0.8s ease-out',
+                        'slideInRight': 'slideInRight 0.8s ease-out',
+                        'slideInLeft': 'slideInLeft 0.8s ease-out',
+                        'bounceIn': 'bounceIn 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                 }
         }
   },
