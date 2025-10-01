@@ -102,19 +102,22 @@ const AdminPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <SecurityProtection />
+      
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <button 
               onClick={() => navigate('/')}
-              className="flex items-center space-x-3 text-gray-600 hover:text-gray-900"
+              className="flex items-center space-x-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               <ArrowRight className="h-5 w-5" />
               <span>العودة للموقع</span>
             </button>
-            <h1 className="text-2xl font-bold text-gray-900">لوحة إدارة الطلبات</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">لوحة إدارة الطلبات</h1>
+            <ThemeToggle />
           </div>
         </div>
       </header>
