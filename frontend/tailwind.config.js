@@ -52,8 +52,8 @@ module.exports = {
                                 '3': 'hsl(var(--chart-3))',
                                 '4': 'hsl(var(--chart-4))',
                                 '5': 'hsl(var(--chart-5))'
-                        }
-                        primary: {
+                        },
+                        primaryCustom: {
                                 50: '#eff6ff',
                                 100: '#dbeafe',
                                 500: '#3b82f6',
