@@ -52,9 +52,9 @@ const CheckoutPage = () => {
     }
     
     if (!formData.phoneNumber.trim()) {
-      newErrors.phoneNumber = "رقم الهاتف مطلوب";
+      newErrors.phoneNumber = "رقم الواتساب مطلوب";
     } else if (!/^07\d{9}$/.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = "رقم الهاتف غير صحيح (مثال: 07701234567)";
+      newErrors.phoneNumber = "رقم الواتساب غير صحيح (مثال: 07701234567)";
     }
     
     if (!formData.cardNumber.trim()) {
