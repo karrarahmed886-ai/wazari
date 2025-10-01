@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Eye, Check, X, Clock, Search, Filter } from "lucide-react";
+import SecurityProtection from "./SecurityProtection";
+import ThemeToggle from "./ThemeToggle";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
