@@ -215,23 +215,24 @@ const CheckoutPage = () => {
                 )}
               </div>
 
-              {/* Phone Number */}
+              {/* WhatsApp Number */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <Phone className="w-4 h-4 inline mr-2" />
-                  رقم الهاتف
+                  رقم الواتساب
                 </label>
                 <input
                   type="tel"
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.phoneNumber ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${
+                    errors.phoneNumber ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                   }`}
                   placeholder="07701234567"
                   data-testid="phone-number"
                 />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">اكتب رقمك في الواتساب</p>
                 {errors.phoneNumber && (
                   <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>
                 )}
