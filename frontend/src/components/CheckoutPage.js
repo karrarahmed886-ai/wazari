@@ -203,7 +203,7 @@ const CheckoutPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-indigo-900 transition-colors duration-300">
       <SecurityProtection />
-      <Sidebar />
+      <Sidebar showToggle={false} />
       
       {/* Header */}
       <header className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700">
