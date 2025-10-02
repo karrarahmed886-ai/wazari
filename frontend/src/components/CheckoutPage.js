@@ -475,19 +475,22 @@ const CheckoutPage = () => {
               ))}
             </div>
 
+            <div className="mb-4 text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-lg p-3 text-sm font-semibold">
+              ملاحظة مهمة: في حال إرسال رصيد وهمي أو غير صالح يحق لنا حظرك من الموقع نهائياً.
+            </div>
             <div className="flex space-x-3">
               <button
                 onClick={() => setShowConfirmation(false)}
-                className="flex-1 px-4 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg font-medium transition-colors"
+                className="flex-1 px-4 py-3 rounded-lg font-bold transition-all duration-200 border-2 border-gray-300 hover:border-gray-400 bg-white dark:bg-gray-700 text-gray-800 dark:text-white hover:shadow-md"
               >
-                مراجعة الرصيد
+                ⇦ مراجعة الرصيد
               </button>
               <button
                 onClick={confirmOrder}
                 disabled={loading}
-                className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-lg font-medium disabled:opacity-50 transition-colors"
+                className="flex-1 px-4 py-3 rounded-lg font-bold transition-all duration-200 text-white bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 disabled:opacity-50 hover:shadow-md"
               >
-                {loading ? "جاري الإرسال..." : "إكمال الطلب"}
+                {loading ? "جاري الإرسال..." : "إكمال الطلب ✓"}
               </button>
             </div>
           </div>
