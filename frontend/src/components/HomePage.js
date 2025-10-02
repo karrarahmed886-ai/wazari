@@ -132,11 +132,11 @@ const HomePage = () => {
             <div className="mb-6">
               <Sparkles className="inline-block w-12 h-12 text-yellow-400 animate-pulse mb-4" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              احصل على الأسئلة الوزارية
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight px-4">
+              احصل على الأسئلة الوزارية 📚
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              جميع أسئلة الامتحانات الوزارية لجميع المراحل الدراسية بأعلى جودة وأسرع وقت
+            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-blue-100 max-w-4xl mx-auto leading-relaxed px-4">
+              جميع أسئلة الامتحانات الوزارية لجميع المراحل الدراسية بأعلى جودة وأسرع وقت ⚡
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8 text-blue-100 mb-8">
               <div className="flex items-center space-x-2 animate-fadeInUp delay-200">
