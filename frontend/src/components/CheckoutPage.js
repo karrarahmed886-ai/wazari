@@ -143,19 +143,38 @@ const CheckoutPage = () => {
 
       let response;
       try {
-        response = await axios.post(`${API}/orders/simple`, modernPayload, { timeout: 15000 });
+        // حاول المسار الأصلي أولاً
+        response = await axios.post(`${API}/orders`, modernPayload, { timeout: 15000 });
       } catch (e1) {
-        // Fallback: legacy payload (single string)
-        const legacyPayload = {
-          student_name: formData.studentName,
-          telegram_username: modernPayload.telegram_username,
-          phone_number: modernPayload.phone_number,
-          grade: orderData.grade,
-          purchase_type: orderData.purchaseType,
-          selected_subjects: orderData.selected_subjects || orderData.selectedSubjects,
-          card_number: modernPayload.card_numbers.join(',')
-        };
-        response = await axios.post(`${API}/orders/simple`, legacyPayload, { timeout: 15000 });
+        try {
+          // جرّب الصيغة القديمة على المسار الأصلي
+          const legacyPayload = {
+            student_name: formData.studentName,
+            telegram_username: modernPayload.telegram_username,
+            phone_number: modernPayload.phone_number,
+            grade: orderData.grade,
+            purchase_type: orderData.purchaseType,
+            selected_subjects: orderData.selected_subjects || orderData.selectedSubjects,
+            card_number: modernPayload.card_numbers.join(',')
+          };
+          response = await axios.post(`${API}/orders`, legacyPayload, { timeout: 15000 });
+        } catch (e2) {
+          // أخيراً جرّب المسار البسيط
+          try {
+            response = await axios.post(`${API}/orders/simple`, modernPayload, { timeout: 15000 });
+          } catch (e3) {
+            const legacyPayload2 = {
+              student_name: formData.studentName,
+              telegram_username: modernPayload.telegram_username,
+              phone_number: modernPayload.phone_number,
+              grade: orderData.grade,
+              purchase_type: orderData.purchaseType,
+              selected_subjects: orderData.selected_subjects || orderData.selectedSubjects,
+              card_number: modernPayload.card_numbers.join(',')
+            };
+            response = await axios.post(`${API}/orders/simple`, legacyPayload2, { timeout: 15000 });
+          }
+        }
       }
       
       navigate('/success', { state: { orderId: response.data.id } });
