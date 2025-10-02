@@ -75,11 +75,6 @@ const FAQPage = () => {
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6">
             <p className="whitespace-pre-line leading-8 text-gray-900 dark:text-white select-none">
 👤 : شلون احجز؟ 🤔
-اضغط هنا (ذهاب تلقائي الى الباقات) واختار صفك والمواد ✅ 
-واضغط هنا للاستفسار والاسئلة فقط
-            </p>
-            <p className="whitespace-pre-line leading-8 text-gray-900 dark:text-white select-none mt-3">
-👤 : شلون احجز؟ 🤔
 اضغط العودة للرئيسية في يمين الزاوية العليا وستظهر لك الباقات
             </p>
           </div>
