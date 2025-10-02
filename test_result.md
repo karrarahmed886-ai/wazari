@@ -206,11 +206,11 @@
         comment: "✅ Sidebar contact dropdown working correctly. 'تواصل معنا' button expands to show dropdown with both 'الأستاذ كرار فاضل' and 'قناتنا الرسمية' items. Grade submenu ('اطلب الآن') also expands/collapses properly. Old standalone channel button has been removed."
   - task: "اتساق إرسال الطلب مع الباكेंड الحالي (حقل card_number فقط)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/CheckoutPage.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
