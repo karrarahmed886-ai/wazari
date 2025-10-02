@@ -144,12 +144,12 @@ const HomePage = () => {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="group bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+            <button onClick={scrollToGrades} className="group bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <BookOpen className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-4">مادة واحدة</h3>
+                <h3 className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-4">مادة واحدة 📚</h3>
                 <div className="text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">10$</div>
                 <p className="text-blue-700 dark:text-blue-300 mb-6 font-medium">كارت رصيد آسياسيل</p>
                 <ul className="text-blue-800 dark:text-blue-200 space-y-3 mb-8 text-right">
@@ -167,13 +167,16 @@ const HomePage = () => {
                   </li>
                   <li className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-500 ml-2" />
-                    إرسال فوري عبر التلغرام
+                    إرسال فوري ⚡
                   </li>
                 </ul>
+                <div className="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">
+                  اختر الآن 👆
+                </div>
               </div>
-            </div>
+            </button>
             
-            <div className="group bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 rounded-2xl p-8 border-2 border-green-300 dark:border-green-600 relative hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+            <button onClick={scrollToGrades} className="group bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 rounded-2xl p-8 border-2 border-green-300 dark:border-green-600 relative hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg">
                   ⭐ الأكثر توفيراً ⭐
@@ -183,7 +186,7 @@ const HomePage = () => {
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <GraduationCap className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-green-900 dark:text-green-100 mb-4">جميع المواد</h3>
+                <h3 className="text-2xl font-bold text-green-900 dark:text-green-100 mb-4">جميع المواد 🎯</h3>
                 <div className="text-5xl font-bold text-green-600 dark:text-green-400 mb-2">50$</div>
                 <p className="text-green-700 dark:text-green-300 mb-6 font-medium">كارت رصيد آسياسيل</p>
                 <ul className="text-green-800 dark:text-green-200 space-y-3 mb-8 text-right">
@@ -193,7 +196,7 @@ const HomePage = () => {
                   </li>
                   <li className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-500 ml-2" />
-                    وفر أكثر من 30$
+                    وفر أكثر من 30$ 💰
                   </li>
                   <li className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-500 ml-2" />
@@ -201,11 +204,14 @@ const HomePage = () => {
                   </li>
                   <li className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-500 ml-2" />
-                    دعم مجاني مدى الحياة
+                    دعم مجاني مدى الحياة 🎁
                   </li>
                 </ul>
+                <div className="bg-green-600 text-white px-4 py-2 rounded-lg font-bold">
+                  اختر الآن 👆
+                </div>
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </section>
