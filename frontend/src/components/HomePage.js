@@ -214,9 +214,9 @@ const HomePage = () => {
             </button>
             
             <button onClick={scrollToGrades} className="group bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 rounded-2xl p-8 border-2 border-green-300 dark:border-green-600 relative hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-              {/* Premium Badge */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg">
+              {/* Premium Badge - ensure on top */}
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full text-sm font-bold animate-pulse shadow-2xl ring-2 ring-white/40">
                   ⭐️ الأكثر توفيراً ⭐️
                 </span>
               </div>
