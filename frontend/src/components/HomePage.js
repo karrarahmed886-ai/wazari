@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookOpen, GraduationCap, Users, Star, MessageCircle, Phone, Sparkles, Award, Clock, Shield } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import FloatingChannelTab from "./FloatingChannelTab";
+import Sidebar from "./Sidebar";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
