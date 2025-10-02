@@ -99,8 +99,8 @@ const HomePage = () => {
                 title="Admin Panel"
               />
             </div>
-            {/* Mobile Theme Toggle exact position as per your mark */}
-            <div className="sm:hidden absolute top-1 right-2 z-[60]">
+            {/* Mobile Theme Toggle beside sidebar button */}
+            <div className="sm:hidden absolute top-4 left-20 z-[60]">
               <ThemeToggle />
             </div>
           </div>
