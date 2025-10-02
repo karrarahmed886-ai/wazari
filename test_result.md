@@ -164,15 +164,18 @@
         comment: "✅ Mobile header overlap fix working correctly. On mobile viewport 390x800, ThemeToggle button positioned at x=40 and Sidebar toggle at x=16, providing adequate spacing to prevent overlap. No visual interference between buttons."
   - task: "جعل زر الشريط الجانبي ثابت (بدون حركة/نبض)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/Sidebar.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "إزالة animate/transform hover scale والاكتفاء بانتقالات ألوان."
+      - working: true
+        agent: "testing"
+        comment: "✅ Sidebar menu toggle button is static with no pulse/scale animation. Button styles show transform: none and only color transitions, confirming removal of scale animations. Button remains static as required."
   - task: "طلباتي تعرض طلبات المستخدم فقط (باستخدام client key مخزن محلياً)"
     implemented: true
     working: "NA"
