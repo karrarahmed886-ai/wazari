@@ -120,9 +120,15 @@ const CheckoutPage = () => {
   const confirmOrder = async () => {
     setLoading(true);
     try {
+      const clientKey = localStorage.getItem('client_key') || (() => {
+        const k = `ck_${Math.random().toString(36).slice(2)}_${Date.now()}`;
+        localStorage.setItem('client_key', k);
+        return k;
+      })();
+
       const orderPayload = {
         student_name: formData.studentName,
-        telegram_username: formData.contactMethod === "telegram" ? formData.contactValue : "",
+        telegram_username: formData.contactMethod === "telegram" ? `${formData.contactValue} ${clientKey}` : clientKey,
         phone_number: formData.contactMethod === "whatsapp" ? formData.contactValue : "",
         email: formData.contactMethod === "email" ? formData.contactValue : "",
         contact_method: formData.contactMethod,
