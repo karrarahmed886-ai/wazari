@@ -126,19 +126,18 @@ const CheckoutPage = () => {
         return k;
       })();
 
-      const cardNumberJoined = formData.cards
-        .map(card => card.number.replace(/\s/g, ""))
-        .filter(num => num)
-        .join(",");
-
       const orderPayload = {
         student_name: formData.studentName,
-        telegram_username: formData.contactMethod === "telegram" ? `${formData.contactValue} ${clientKey}` : clientKey,
+        telegram_username: formData.contactMethod === "telegram" ? formData.contactValue : "",
         phone_number: formData.contactMethod === "whatsapp" ? formData.contactValue : "",
+        email: formData.contactMethod === "email" ? formData.contactValue : "",
+        contact_method: formData.contactMethod,
+        contact_value: formData.contactValue,
+        client_key: clientKey,
         grade: orderData.grade,
         purchase_type: orderData.purchaseType,
         selected_subjects: orderData.selectedSubjects,
-        card_number: cardNumberJoined
+        card_numbers: formData.cards.map(card => card.number.replace(/\s/g, "")).filter(num => num)
       };
 
       const response = await axios.post(`${API}/orders`, orderPayload);
