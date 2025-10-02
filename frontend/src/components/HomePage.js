@@ -96,13 +96,27 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 dark:from-blue-800 dark:via-indigo-900 dark:to-purple-900 text-white py-20 overflow-hidden">
-        {/* Animated background elements */}
+        {/* Enhanced Animated background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
-          <div className="absolute top-20 right-20 w-16 h-16 bg-yellow-400/20 rounded-full animate-bounce delay-1000"></div>
-          <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-pink-400/20 rounded-full animate-ping delay-500"></div>
-          <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-400/10 rounded-full animate-pulse delay-700"></div>
+          {/* Floating emojis */}
+          <div className="absolute top-16 left-10 text-4xl animate-bounce delay-0">📚</div>
+          <div className="absolute top-32 right-20 text-3xl animate-pulse delay-1000">⭐</div>
+          <div className="absolute bottom-24 left-1/4 text-3xl animate-ping delay-500">🎓</div>
+          <div className="absolute bottom-16 right-10 text-4xl animate-bounce delay-700">📖</div>
+          <div className="absolute top-1/3 left-1/3 text-2xl animate-float delay-300">✨</div>
+          <div className="absolute top-2/3 right-1/3 text-2xl animate-pulse delay-900">🏆</div>
+          
+          {/* Geometric shapes */}
+          <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-r from-white/10 to-yellow-400/20 rounded-full animate-pulse"></div>
+          <div className="absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full animate-bounce delay-1000"></div>
+          <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-full animate-ping delay-500"></div>
+          <div className="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full animate-pulse delay-700"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full animate-float"></div>
+          
+          {/* Sparkle effects */}
+          <div className="absolute top-1/4 left-3/4 w-2 h-2 bg-white rounded-full animate-ping delay-200"></div>
+          <div className="absolute top-3/4 left-1/4 w-2 h-2 bg-yellow-400 rounded-full animate-ping delay-800"></div>
+          <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-pink-400 rounded-full animate-ping delay-400"></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
