@@ -118,15 +118,13 @@ const HomePage = () => {
           <div className="absolute bottom-4 md:bottom-16 right-4 md:right-10 text-3xl md:text-4xl animate-bounce delay-700">📖</div>
           <div className="hidden lg:block absolute top-1/3 left-1/3 text-2xl animate-float delay-300">✨</div>
           <div className="hidden lg:block absolute top-2/3 right-1/3 text-2xl animate-pulse delay-900">🏆</div>
-          
-          {/* Geometric shapes - Simplified for mobile */}
+          {/* Geometric shapes */}
           <div className="absolute top-4 md:top-10 left-4 md:left-10 w-12 md:w-20 h-12 md:h-20 bg-gradient-to-r from-white/5 md:from-white/10 to-yellow-400/10 md:to-yellow-400/20 rounded-full animate-pulse"></div>
           <div className="hidden md:block absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full animate-bounce delay-1000"></div>
           <div className="absolute bottom-8 md:bottom-20 left-4 md:left-1/4 w-8 md:w-12 h-8 md:h-12 bg-gradient-to-r from-pink-400/10 md:from-pink-400/20 to-purple-400/10 md:to-purple-400/20 rounded-full animate-ping delay-500"></div>
           <div className="hidden md:block absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full animate-pulse delay-700"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 md:w-32 h-20 md:h-32 bg-gradient-to-r from-blue-400/5 md:from-blue-400/10 to-purple-400/5 md:to-purple-400/10 rounded-full animate-float"></div>
-          
-          {/* Sparkle effects - Minimal on mobile */}
+          {/* Sparkles */}
           <div className="hidden md:block absolute top-1/4 left-3/4 w-2 h-2 bg-white rounded-full animate-ping delay-200"></div>
           <div className="absolute top-3/4 left-1/4 w-1 md:w-2 h-1 md:h-2 bg-yellow-400 rounded-full animate-ping delay-800"></div>
           <div className="hidden lg:block absolute top-1/2 right-1/4 w-2 h-2 bg-pink-400 rounded-full animate-ping delay-400"></div>
@@ -164,8 +162,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Features Section - Removed duplicate */}
 
       {/* Pricing Section */}
       <section className="py-16 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-indigo-900/30 dark:to-purple-900/50 transition-colors duration-300 relative">
@@ -319,7 +315,7 @@ const HomePage = () => {
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="text-center group">
-              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items_center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <Shield className="w-8 h-8 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">ضمان الجودة</h3>
@@ -327,7 +323,7 @@ const HomePage = () => {
             </div>
             
             <div className="text-center group">
-              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx_auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <Clock className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">تسليم سريع</h3>
@@ -351,8 +347,8 @@ const HomePage = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="animate-fadeInUp">
             <h2 className="text-4xl font-bold mb-4">تواصل معنا</h2>
-            <p className="text-xl mb-8 text-white/90">نحن هنا لمساعدتك في رحلتك التعليمية</p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <p className="text-xl mb-8 text_white/90">نحن هنا لمساعدتك في رحلتك التعليمية</p>
+            <div className="flex flex_col md:flex-row items-center justify-center gap-6">
               <a
                 href="https://t.me/SS_5XN"
                 target="_blank"
@@ -366,7 +362,7 @@ const HomePage = () => {
                 href="https://t.me/KAHRKM"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                className="flex items-center space-x-3 bg-white/20 hover:bg_white/30 backdrop-blur-sm px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
               >
                 <Phone className="w-6 h-6" />
                 <span className="font-semibold text-lg">تواصل مع الأستاذ كرار فاضل</span>
@@ -381,7 +377,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className="p-3 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-xl">
+              <div className="p-3 bg-gradient_to-br from-blue-500 via-indigo-600 to-purple-600 rounded-xl">
                 <BookOpen className="h-8 w-8 text-white" />
               </div>
               <div className="text-right">
