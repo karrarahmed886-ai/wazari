@@ -204,6 +204,11 @@ async def update_order(order_id: str, update_data: OrderUpdate):
     
     result = await db.orders.update_one(
         {"id": order_id}, 
+
+@api_router.post("/notify-test")
+async def notify_test():
+    return {"ok": True}
+
         {"$set": update_dict}
     )
     
