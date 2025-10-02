@@ -362,7 +362,7 @@ const HomePage = () => {
                 href="https://t.me/KAHRKM"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-3 bg-white/20 hover:bg_white/30 backdrop-blur-sm px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                className="flex items-center space-x-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
               >
                 <Phone className="w-6 h-6" />
                 <span className="font-semibold text-lg">تواصل مع الأستاذ كرار فاضل</span>
