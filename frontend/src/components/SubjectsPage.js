@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowRight, BookOpen, Check, ShoppingCart } from "lucide-react";
 import SecurityProtection from "./SecurityProtection";
 import ThemeToggle from "./ThemeToggle";
+import Sidebar from "./Sidebar";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
