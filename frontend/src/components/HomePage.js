@@ -314,7 +314,7 @@ const HomePage = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="text-center group relative">
+            <div className="text-center group relative cursor-pointer">
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <Shield className="w-8 h-8 text-blue-600 dark:text-blue-400" />
               </div>
@@ -322,7 +322,7 @@ const HomePage = () => {
               <p className="text-gray-600 dark:text-gray-300">جميع الأسئلة مراجعة ومؤكدة من مصادر رسمية</p>
             </div>
             
-            <div className="text-center group relative">
+            <div className="text-center group relative cursor-pointer">
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <Clock className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
@@ -330,7 +330,7 @@ const HomePage = () => {
               <p className="text-gray-600 dark:text-gray-300">تصلك الأسئلة فوراً بعد تأكيد الدفع</p>
             </div>
             
-            <div className="text-center group relative">
+            <div className="text-center group relative cursor-pointer">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <MessageCircle className="w-8 h-8 text-purple-600 dark:text-purple-400" />
               </div>
