@@ -223,3 +223,5 @@
     message: "تم تنفيذ تعديلات الواجهة المطلوبة دون إعادة تشغيل الخدمات. سنجري اختبارات خلفية سريعة ثم اختبارات واجهة شاملة تتضمن إنشاء طلب جديد والتحقق من ظهوره في صفحة طلباتي فقط، وفحص الشارات وزر الثيم والشريط الجانبي."
   - agent: "testing"
     message: "BACKEND TESTING COMPLETE: ✅ GET /api/grades (4 grades), ✅ GET /api/orders, ✅ DELETE /api/orders/{id}. ❌ CRITICAL ISSUE: POST /api/orders has card_number field mismatch - backend expects 'card_numbers' (array) but review asks for 'card_number' (string). When card_number sent as string, it's ignored and card_numbers remains empty. Backend only processes card_numbers from OrderCreate model. This needs to be fixed for proper card number handling."
+  - agent: "testing"
+    message: "UI TESTING COMPLETE: ✅ Limited offer badges visible (12px font, meets requirement), ✅ Mobile header positioning fixed (ThemeToggle at x=40, Sidebar at x=16), ✅ Sidebar menu button static (no scale animation), ✅ Grade submenu expands correctly, ✅ Contact dropdown shows both items (teacher + channel), ✅ Checkout page accessible with multiple card inputs, ✅ Orders page loads correctly. All major UI requirements working as expected."
