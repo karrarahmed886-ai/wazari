@@ -340,6 +340,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+              {/* subtle anchor to stabilize icons alignment */}
+              <span className="absolute inset-0 pointer-events-none" />
 
       {/* Contact Section */}
       <section id="contact-section" className="py-20 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-800 dark:via-purple-800 dark:to-pink-800 text-white relative overflow-hidden">
