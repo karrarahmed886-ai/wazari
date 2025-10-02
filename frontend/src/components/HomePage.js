@@ -100,7 +100,7 @@ const HomePage = () => {
               />
             </div>
             {/* Mobile Theme Toggle beside sidebar button */}
-            <div className="sm:hidden absolute top-4 left-20 z-[60]">
+            <div className="sm:hidden absolute top-4 left-16 z-[60]">
               <ThemeToggle />
             </div>
           </div>
