@@ -228,7 +228,7 @@ async def send_telegram_message(token: str, chat_id: str, text: str):
         )
         await send_telegram_message(tg_token, tg_chat, text)
 
-    return order
+    return order.dict()
 
 @api_router.get("/orders", response_model=List[Order])
 async def get_orders(status: Optional[OrderStatus] = None):
