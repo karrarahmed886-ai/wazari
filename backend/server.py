@@ -198,6 +198,13 @@ async def get_order(order_id: str):
         raise HTTPException(status_code=404, detail="Order not found")
     return Order(**order)
 
+@api_router.delete("/orders/{order_id}")
+async def delete_order(order_id: str):
+    result = await db.orders.delete_one({"id": order_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return {"message": "Order deleted successfully"}
+
 # Subject management (for admin)
 @api_router.post("/subjects", response_model=Subject)
 async def create_subject(subject_data: SubjectCreate):
