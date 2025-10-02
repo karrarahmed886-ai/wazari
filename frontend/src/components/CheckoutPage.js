@@ -315,7 +315,7 @@ const CheckoutPage = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <CreditCard className="w-4 h-4 inline mr-2" />
-                  رقم كارت الرصيد (آسياسيل)
+                  رقم كارت الرصيد الأول (آسياسيل)
                 </label>
                 <input
                   type="text"
@@ -336,6 +336,62 @@ const CheckoutPage = () => {
                 />
                 {errors.cardNumber && (
                   <p className="text-red-500 text-sm mt-1">{errors.cardNumber}</p>
+                )}
+              </div>
+
+              {/* Second Card Option */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="useSecondCard"
+                      checked={formData.useSecondCard}
+                      onChange={handleInputChange}
+                      className="sr-only"
+                    />
+                    <div className={`w-5 h-5 rounded border-2 mr-2 flex items-center justify-center transition-colors ${
+                      formData.useSecondCard 
+                        ? 'border-blue-500 bg-blue-500' 
+                        : 'border-gray-300 dark:border-gray-600'
+                    }`}>
+                      {formData.useSecondCard && (
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      إضافة كارت رصيد ثاني
+                    </span>
+                  </label>
+                </div>
+                
+                {formData.useSecondCard && (
+                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <CreditCard className="w-4 h-4 inline mr-2" />
+                      رقم كارت الرصيد الثاني
+                    </label>
+                    <input
+                      type="text"
+                      name="secondCardNumber"
+                      value={formatCardNumber(formData.secondCardNumber)}
+                      onChange={(e) => {
+                        const numbers = e.target.value.replace(/\D/g, "");
+                        if (numbers.length <= 16) {
+                          handleInputChange({ target: { name: "secondCardNumber", value: numbers } });
+                        }
+                      }}
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-colors"
+                      placeholder="1234 5678 9012 3456"
+                      maxLength="19"
+                      data-testid="second-card-number"
+                    />
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      يمكنك إضافة كارت ثاني إذا كان الأول غير كافي للمبلغ المطلوب
+                    </p>
+                  </div>
                 )}
               </div>
 
