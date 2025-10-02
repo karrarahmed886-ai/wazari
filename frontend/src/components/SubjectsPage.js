@@ -33,9 +33,29 @@ const SubjectsPage = () => {
     try {
       const decodedGrade = decodeURIComponent(grade);
       const response = await axios.get(`${API}/subjects/${decodedGrade}`);
-      setSubjects(response.data);
+      const data = response.data || [];
+      if (!data || data.length === 0) throw new Error('empty');
+      setSubjects(data);
     } catch (error) {
-      console.error("Error fetching subjects:", error);
+      // Fallback: build local subjects same as القديمة
+      setFallback(true);
+      const decodedGrade = decodeURIComponent(grade);
+      const map = {
+        "السادس ابتدائي": [
+          "الرياضيات", "اللغة العربية", "اللغة الإنجليزية", "العلوم", "الاجتماعيات", "التربية الإسلامية"
+        ],
+        "الثالث متوسط": [
+          "الرياضيات", "اللغة العربية", "اللغة الإنجليزية", "الفيزياء", "الكيمياء", "الأحياء", "الاجتماعيات", "التربية الإسلامية"
+        ],
+        "السادس إعدادي - علمي": [
+          "الرياضيات", "اللغة العربية", "اللغة الإنجليزية", "الفيزياء", "الكيمياء", "الأحياء", "التربية الإسلامية"
+        ],
+        "السادس إعدادي - أدبي": [
+          "الرياضيات", "اللغة العربية", "اللغة الإنجليزية", "التاريخ", "الجغرافيا", "الاقتصاد", "التربية الإسلامية"
+        ]
+      };
+      const list = (map[decodedGrade] || []).map((name, i) => ({ id: `local-${i}`, name }));
+      setSubjects(list);
     } finally {
       setLoading(false);
     }
