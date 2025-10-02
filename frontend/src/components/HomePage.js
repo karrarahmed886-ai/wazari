@@ -65,7 +65,10 @@ const HomePage = () => {
       <header className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
+            <button 
+              onClick={() => navigate('/')}
+              className="flex items-center space-x-6 hover:opacity-90 transition-opacity duration-300 select-none"
+            >
               <div className="relative group">
                 <div className="p-4 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-700 dark:from-blue-500 dark:via-indigo-600 dark:to-purple-600 rounded-2xl shadow-2xl transform group-hover:scale-110 transition-all duration-300">
                   <BookOpen className="h-9 w-9 text-white" />
@@ -75,7 +78,7 @@ const HomePage = () => {
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 select-none">
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 dark:from-blue-300 dark:via-indigo-300 dark:to-purple-300 bg-clip-text text-transparent leading-tight">
                   الأسئلة الوزارية
                 </h1>
@@ -83,7 +86,7 @@ const HomePage = () => {
                   بإشراف الأستاذ كرار فاضل
                 </p>
               </div>
-            </div>
+            </button>
             <div className="flex items-center space-x-3">
               <ThemeToggle />
               {/* Hidden Admin Access */}
