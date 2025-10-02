@@ -15,17 +15,32 @@ const OrdersPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // Since we don't have user authentication, we'll show all orders for now
-    // In production, this would be filtered by user ID
+    // Filter by local identifier (cookie or localStorage) so the user sees only their orders
     fetchOrders();
   }, []);
+
+  const getClientKey = () => {
+    // Use a stable client key from localStorage, create if missing
+    let key = localStorage.getItem('client_key');
+    if (!key) {
+      key = `ck_${Math.random().toString(36).slice(2)}_${Date.now()}`;
+      localStorage.setItem('client_key', key);
+    }
+    return key;
+  };
 
   const fetchOrders = async () => {
     try {
       const response = await axios.get(`${API}/orders`);
-      setOrders(response.data);
+      const all = response.data || [];
+      const key = getClientKey();
+      // Filter orders belonging to this client by matching contact_value or a stored key embedded in telegram_username
+      const mine = all.filter(o => {
+        return (o.contact_value && o.contact_value.trim()) || (o.telegram_username && o.telegram_username.includes(key));
+      });
+      setOrders(mine);
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      console.error("Error fetching orders:");
     } finally {
       setLoading(false);
     }
