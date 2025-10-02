@@ -88,7 +88,10 @@ const HomePage = () => {
               </div>
             </button>
             <div className="flex items-center space-x-3">
-              <ThemeToggle />
+              {/* Move theme button slightly left on mobile to avoid overlap with sidebar */}
+              <div className="mr-10 sm:mr-0">
+                <ThemeToggle />
+              </div>
               {/* Hidden Admin Access */}
               <div 
                 onDoubleClick={() => navigate('/admin')}
