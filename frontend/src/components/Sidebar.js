@@ -9,7 +9,8 @@ import {
   Phone, 
   ChevronDown,
   Users,
-  ShoppingCart
+  ShoppingCart,
+  ListChecks
 } from "lucide-react";
 
 const Sidebar = () => {
