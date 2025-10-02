@@ -220,8 +220,8 @@ const HomePage = () => {
                   ⭐️ الأكثر توفيراً ⭐️
                 </span>
               </div>
-              {/* Limited Time Badge */}
-              <div className="absolute -top-3 -left-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-bounce shadow-lg transform -rotate-12">
+              {/* Limited Time Badge - more visible */}
+              <div className="absolute -top-4 -left-4 md:-top-3 md:-left-3 bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-4 py-1.5 rounded-full text-sm md:text-xs font-extrabold animate-bounce shadow-2xl transform -rotate-12 z-10 border border-white/50">
                 ⏰ لفترة محدودة
               </div>
               <div className="text-center">
