@@ -178,8 +178,8 @@ const HomePage = () => {
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <button onClick={scrollToGrades} className="group bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
-              {/* Limited Offer Badge - make more visible on desktop and mobile */}
-              <div className="absolute -top-4 -right-4 md:-top-3 md:-right-3 bg-gradient-to-r from-red-600 to-pink-600 text-white px-5 py-1.5 md:px-4 md:py-1 rounded-full text-sm md:text-xs font-extrabold animate-pulse shadow-2xl transform rotate-12 z-10 border border-white/50">
+              {/* Limited Offer Badge - repositioned lower for visibility */}
+              <div className="absolute top-3 right-3 bg-gradient-to-r from-red-600 to-pink-600 text-white px-5 py-1.5 rounded-full text-sm font-extrabold animate-pulse shadow-2xl z-10 border border-white/50">
                 🔥 عرض محدود
               </div>
               <div className="text-center">
