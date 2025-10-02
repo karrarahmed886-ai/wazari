@@ -101,3 +101,117 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+## user_problem_statement: "بيع أسئلة وزارية لطلاب العراق مع واجهة عربية، شراء بكارت آسياسيل، ولوحة إدارة محمية وكافة تحسينات الواجهة (وضع داكن، شريط جانبي، وميزة طلباتي). المطلوب الآن: تحسين وسم عرض محدود ليكون أوضح، جعل زر الشريط ثابت بلا حركة، نقل زر الثيم قليلاً يسار على الجوال، إظهار طلبات المستخدم فقط في صفحة طلباتي، وتعديل الشريط الجانبي لإضافة قائمة منسدلة لتواصل معنا."
+
+## backend:
+  - task: "نموذج الطلبات يدعم بطاقات متعددة وclient_key"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "تم تحضير تعديلات (card_numbers, client_key) لكن لن نعيد تشغيل السيرفر الآن بناءً على طلب العميل. السلوك الفعلي سيبقى كما هو حتى إعادة التشغيل."
+  - task: "حذف الطلبات عبر DELETE /api/orders/{id}"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "المسار موجود مسبقاً ويُستخدم في لوحة الإدارة. سنجري اختبار تأكيدي."
+
+## frontend:
+  - task: "تحسين وسم عرض محدود ليكون أوضح على الحاسوب والجوال"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/HomePage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "تكبير الشارة، رفع التباين، إضافة ظل وحدّ أبيض وz-index."
+  - task: "تحريك زر الثيم يسار قليلاً على الجوال"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/HomePage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "إضافة mr-10 على الشاشات الصغيرة فقط لتفادي تداخل زر القائمة."
+  - task: "جعل زر الشريط الجانبي ثابت (بدون حركة/نبض)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Sidebar.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "إزالة animate/transform hover scale والاكتفاء بانتقالات ألوان."
+  - task: "طلباتي تعرض طلبات المستخدم فقط (باستخدام client key مخزن محلياً)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/OrdersPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "توليد client_key في localStorage، تضمينه عند إنشاء الطلب داخل telegram_username، ثم التصفية محلياً للطلبات."
+  - task: "تعديل الشريط الجانبي: حذف زر قناتنا الرسمية وإضافة قائمة منسدلة لتواصل معنا"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Sidebar.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "إضافة قائمة منسدلة تحتوي: الأستاذ كرار فاضل + قناتنا الرسمية."
+  - task: "اتساق إرسال الطلب مع الباكेंड الحالي (حقل card_number فقط)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/CheckoutPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "دمج عدة بطاقات في نص واحد مفصول بفاصلة داخل card_number ليتوافق مع API الحالي بدون إعادة تشغيل."
+
+## metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: true
+
+## test_plan:
+  current_focus:
+    - "الواجهة: وضوح شارة عرض محدود"
+    - "الواجهة: ثبات زر القائمة وعدم تحريكه"
+    - "الواجهة: تجنب تداخل زر الثيم مع زر القائمة على الجوال"
+    - "الواجهة: صفحة طلباتي تُظهر طلبات المستخدم فقط"
+    - "الواجهة: الشريط الجانبي (قائمة تواصل معنا المنسدلة)"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+## agent_communication:
+  - agent: "main"
+    message: "تم تنفيذ تعديلات الواجهة المطلوبة دون إعادة تشغيل الخدمات. سنجري اختبارات خلفية سريعة ثم اختبارات واجهة شاملة تتضمن إنشاء طلب جديد والتحقق من ظهوره في صفحة طلباتي فقط، وفحص الشارات وزر الثيم والشريط الجانبي."
