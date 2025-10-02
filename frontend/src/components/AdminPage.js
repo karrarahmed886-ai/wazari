@@ -269,6 +269,7 @@ const AdminPage = () => {
                               disabled={updating}
                               className="text-green-600 hover:text-green-900 p-1 disabled:opacity-50"
                               data-testid={`confirm-order-${order.id}`}
+                              title="تأكيد الطلب"
                             >
                               <Check className="w-4 h-4" />
                             </button>
@@ -277,11 +278,21 @@ const AdminPage = () => {
                               disabled={updating}
                               className="text-red-600 hover:text-red-900 p-1 disabled:opacity-50"
                               data-testid={`reject-order-${order.id}`}
+                              title="رفض الطلب"
                             >
                               <X className="w-4 h-4" />
                             </button>
                           </>
                         )}
+                        <button
+                          onClick={() => handleDeleteOrder(order.id)}
+                          disabled={updating}
+                          className="text-red-600 hover:text-red-900 p-1 disabled:opacity-50"
+                          data-testid={`delete-order-${order.id}`}
+                          title="حذف الطلب نهائياً"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </div>
                     </td>
                   </tr>
