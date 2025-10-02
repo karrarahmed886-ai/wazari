@@ -349,6 +349,9 @@ const HomePage = () => {
           </div>
         </div>
       </footer>
+
+      {/* Floating Channel Tab */}
+      <FloatingChannelTab />
     </div>
   );
 };
