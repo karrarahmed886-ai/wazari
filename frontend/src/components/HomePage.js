@@ -98,10 +98,10 @@ const HomePage = () => {
                 className="w-3 h-8 cursor-pointer opacity-0 hover:opacity-20 transition-opacity duration-300"
                 title="Admin Panel"
               />
+            </div>
             {/* Mobile Theme Toggle exact position as per your mark */}
             <div className="sm:hidden absolute top-1 right-2 z-[60]">
               <ThemeToggle />
-            </div>
             </div>
           </div>
         </div>
