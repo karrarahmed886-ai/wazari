@@ -158,6 +158,76 @@ async def get_pricing():
         }
     }
 
+@api_router.post("/orders/simple")
+async def create_order_simple(data: dict):
+    try:
+        # Extract fields with defaults
+        student_name = data.get("student_name", "").strip()
+        telegram_username = (data.get("telegram_username") or "").strip()
+        phone_number = (data.get("phone_number") or "").strip()
+        email = (data.get("email") or "").strip()
+        contact_method = data.get("contact_method")
+        contact_value = data.get("contact_value")
+        client_key = data.get("client_key")
+        grade = data.get("grade")
+        purchase_type = data.get("purchase_type", "single")
+        selected_subjects = data.get("selected_subjects") or []
+        # Cards: accept both formats
+        cards = []
+        if isinstance(data.get("card_numbers"), list):
+            cards = [str(c).replace(" ", "").strip() for c in data["card_numbers"] if str(c).strip()]
+        elif isinstance(data.get("card_number"), str):
+            cards = [x.strip() for x in data["card_number"].split(",") if x.strip()]
+
+        # Compute amount
+        total_amount = 50 if purchase_type == "all" else max(len(selected_subjects), 1) * 10
+
+        # Build order dict
+        order = {
+            "id": str(uuid.uuid4()),
+            "student_name": student_name,
+            "telegram_username": telegram_username,
+            "phone_number": phone_number,
+            "email": email,
+            "contact_method": contact_method,
+            "contact_value": contact_value,
+            "client_key": client_key,
+            "grade": grade,
+            "purchase_type": purchase_type,
+            "selected_subjects": selected_subjects,
+            "card_numbers": cards,
+            "total_amount": total_amount,
+            "status": "pending",
+            "created_at": datetime.utcnow(),
+            "confirmed_at": None,
+        }
+
+        await db.orders.insert_one(order)
+
+        # Telegram notify (best-effort)
+        tg_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+        tg_chat = os.environ.get("TELEGRAM_CHAT_ID")
+        if tg_token and tg_chat:
+            cards_text = "\n".join([f"• {c}" for c in (order["card_numbers"] or [])]) or "—"
+            text = (
+                f"طلب جديد ✅\n"
+                f"الطالب: {order['student_name']}\n"
+                f"الصف: {order['grade']}\n"
+                f"النوع: {'جميع المواد' if order['purchase_type']=='all' else f'مواد منفردة ({len(order['selected_subjects'])})'}\n"
+                f"المبلغ: ${order['total_amount']}\n"
+                f"التواصل: {order.get('contact_method','') or ''} {order.get('contact_value','') or ''}\n"
+                f"الكروت:\n{cards_text}\n"
+                f"رقم الطلب: {order['id']}"
+            )
+            try:
+                await send_telegram_message(tg_token, tg_chat, text)
+            except Exception:
+                pass
+
+        return {"ok": True, "order": order}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}, status.HTTP_500_INTERNAL_SERVER_ERROR
+
 @api_router.post("/orders")
 async def create_order(order_data: OrderCreateFlex):
     # Calculate total amount
