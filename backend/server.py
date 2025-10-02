@@ -62,6 +62,7 @@ class Order(BaseModel):
     email: Optional[str] = ""
     contact_method: Optional[str] = None
     contact_value: Optional[str] = None
+    client_key: Optional[str] = None
     grade: GradeType
     purchase_type: PurchaseType
     selected_subjects: List[str] = []  # Subject IDs for single purchases
