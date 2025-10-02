@@ -24,7 +24,7 @@ function App() {
             <Route path="/subjects/:grade" element={<SubjectsPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/success" element={<SuccessPage />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin" element={<ProtectedAdmin />} />
           </Routes>
         </BrowserRouter>
       </div>
