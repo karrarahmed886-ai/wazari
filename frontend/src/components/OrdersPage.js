@@ -34,8 +34,8 @@ const OrdersPage = () => {
       const response = await axios.get(`${API}/orders`);
       const all = response.data || [];
       const key = getClientKey();
-      // Only show orders that match this device's client key
-      const mine = all.filter(o => o.client_key === key);
+      // Show only orders that match this device's client key or contain it in telegram_username (fallback)
+      const mine = all.filter(o => (o.client_key && o.client_key === key) || (o.telegram_username && o.telegram_username.includes(key)));
       setOrders(mine);
     } catch (error) {
       console.error("Error fetching orders:", error);
