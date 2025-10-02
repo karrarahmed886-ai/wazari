@@ -103,28 +103,28 @@ const HomePage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 dark:from-blue-800 dark:via-indigo-900 dark:to-purple-900 text-white py-20 overflow-hidden">
-        {/* Enhanced Animated background elements */}
+      <section className="relative bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 dark:from-blue-800 dark:via-indigo-900 dark:to-purple-900 text-white py-16 md:py-20 overflow-hidden">
+        {/* Enhanced Animated background elements - Mobile Optimized */}
         <div className="absolute inset-0">
-          {/* Floating emojis */}
-          <div className="absolute top-16 left-10 text-4xl animate-bounce delay-0">📚</div>
-          <div className="absolute top-32 right-20 text-3xl animate-pulse delay-1000">⭐</div>
-          <div className="absolute bottom-24 left-1/4 text-3xl animate-ping delay-500">🎓</div>
-          <div className="absolute bottom-16 right-10 text-4xl animate-bounce delay-700">📖</div>
-          <div className="absolute top-1/3 left-1/3 text-2xl animate-float delay-300">✨</div>
-          <div className="absolute top-2/3 right-1/3 text-2xl animate-pulse delay-900">🏆</div>
+          {/* Floating emojis - Reduced on mobile */}
+          <div className="hidden md:block absolute top-16 left-10 text-4xl animate-bounce delay-0">📚</div>
+          <div className="absolute top-8 md:top-32 right-4 md:right-20 text-2xl md:text-3xl animate-pulse delay-1000">⭐</div>
+          <div className="hidden md:block absolute bottom-24 left-1/4 text-3xl animate-ping delay-500">🎓</div>
+          <div className="absolute bottom-4 md:bottom-16 right-4 md:right-10 text-3xl md:text-4xl animate-bounce delay-700">📖</div>
+          <div className="hidden lg:block absolute top-1/3 left-1/3 text-2xl animate-float delay-300">✨</div>
+          <div className="hidden lg:block absolute top-2/3 right-1/3 text-2xl animate-pulse delay-900">🏆</div>
           
-          {/* Geometric shapes */}
-          <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-r from-white/10 to-yellow-400/20 rounded-full animate-pulse"></div>
-          <div className="absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full animate-bounce delay-1000"></div>
-          <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-full animate-ping delay-500"></div>
-          <div className="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full animate-pulse delay-700"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full animate-float"></div>
+          {/* Geometric shapes - Simplified for mobile */}
+          <div className="absolute top-4 md:top-10 left-4 md:left-10 w-12 md:w-20 h-12 md:h-20 bg-gradient-to-r from-white/5 md:from-white/10 to-yellow-400/10 md:to-yellow-400/20 rounded-full animate-pulse"></div>
+          <div className="hidden md:block absolute top-20 right-20 w-16 h-16 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full animate-bounce delay-1000"></div>
+          <div className="absolute bottom-8 md:bottom-20 left-4 md:left-1/4 w-8 md:w-12 h-8 md:h-12 bg-gradient-to-r from-pink-400/10 md:from-pink-400/20 to-purple-400/10 md:to-purple-400/20 rounded-full animate-ping delay-500"></div>
+          <div className="hidden md:block absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-purple-400/10 to-blue-400/10 rounded-full animate-pulse delay-700"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 md:w-32 h-20 md:h-32 bg-gradient-to-r from-blue-400/5 md:from-blue-400/10 to-purple-400/5 md:to-purple-400/10 rounded-full animate-float"></div>
           
-          {/* Sparkle effects */}
-          <div className="absolute top-1/4 left-3/4 w-2 h-2 bg-white rounded-full animate-ping delay-200"></div>
-          <div className="absolute top-3/4 left-1/4 w-2 h-2 bg-yellow-400 rounded-full animate-ping delay-800"></div>
-          <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-pink-400 rounded-full animate-ping delay-400"></div>
+          {/* Sparkle effects - Minimal on mobile */}
+          <div className="hidden md:block absolute top-1/4 left-3/4 w-2 h-2 bg-white rounded-full animate-ping delay-200"></div>
+          <div className="absolute top-3/4 left-1/4 w-1 md:w-2 h-1 md:h-2 bg-yellow-400 rounded-full animate-ping delay-800"></div>
+          <div className="hidden lg:block absolute top-1/2 right-1/4 w-2 h-2 bg-pink-400 rounded-full animate-ping delay-400"></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
