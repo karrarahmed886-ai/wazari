@@ -75,6 +75,7 @@ const OrdersPage = () => {
 
   const filteredOrders = orders.filter(order =>
     order.student_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (order.contact_value || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     order.grade.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
