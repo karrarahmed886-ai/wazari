@@ -162,16 +162,16 @@ const Sidebar = ({ showToggle = true }) => {
             <span className="font-medium">طلباتي</span>
           </button>
 
-          {/* About Us */}
+          {/* FAQ / Trust */}
           <button
             onClick={() => {
-              document.getElementById('features-section')?.scrollIntoView({ behavior: 'smooth' });
+              navigate('/faq');
               setIsOpen(false);
             }}
             className="w-full flex items-center px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors"
           >
             <Users className="w-5 h-5 ml-3" />
-            <span className="font-medium">من نحن</span>
+            <span className="font-medium">الأسئلة الشائعة - الضمان و ثقتنا</span>
           </button>
         </div>
 
