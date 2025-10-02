@@ -13,7 +13,7 @@ import {
   ListChecks
 } from "lucide-react";
 
-const Sidebar = () => {
+const Sidebar = ({ showToggle = true }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showGradesMenu, setShowGradesMenu] = useState(false);
   const [showContactMenu, setShowContactMenu] = useState(false);
