@@ -157,7 +157,7 @@ async def get_pricing():
         }
     }
 
-@api_router.post("/orders", response_model=Order)
+@api_router.post("/orders")
 async def create_order(order_data: OrderCreate):
     # Calculate total amount
     if order_data.purchase_type == PurchaseType.SINGLE_SUBJECT:
