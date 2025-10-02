@@ -87,11 +87,6 @@ const FAQPage = () => {
       </main>
 
       {/* Hide sidebar toggle on this page */}
-          <div className="text-center mt-6">
-            <button onClick={() => { window.location.hash = '#pricing'; setTimeout(() => document.getElementById('pricing')?.scrollIntoView({behavior:'smooth', block:'start'}), 50); }} className="inline-block bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-xl font-semibold select-none">
-              اضغط هنا للحجز
-            </button>
-          </div>
       <Sidebar showToggle={false} />
     </div>
   );
