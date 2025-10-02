@@ -136,15 +136,18 @@
 ## frontend:
   - task: "تحسين وسم عرض محدود ليكون أوضح على الحاسوب والجوال"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/HomePage.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "تكبير الشارة، رفع التباين، إضافة ظل وحدّ أبيض وz-index."
+      - working: true
+        agent: "testing"
+        comment: "✅ Limited offer badges are clearly visible on both pricing cards. Found 1 '🔥 عرض محدود' badge and 1 '⏰ لفترة محدودة' badge, both with 12px font size (meets >=12px requirement). Badges are not overlapped and clearly visible on desktop 1920x800 viewport."
   - task: "تحريك زر الثيم يسار قليلاً على الجوال"
     implemented: true
     working: "NA"
