@@ -106,26 +106,32 @@
 ## backend:
   - task: "نموذج الطلبات يدعم بطاقات متعددة وclient_key"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "تم تحضير تعديلات (card_numbers, client_key) لكن لن نعيد تشغيل السيرفر الآن بناءً على طلب العميل. السلوك الفعلي سيبقى كما هو حتى إعادة التشغيل."
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL ISSUE: Backend expects 'card_numbers' (array) but review request asks for 'card_number' (string). When sending card_number as string, it gets ignored and card_numbers remains empty. Backend only processes card_numbers field from OrderCreate model. This is a mismatch between review requirements and actual implementation."
   - task: "حذف الطلبات عبر DELETE /api/orders/{id}"
     implemented: true
     working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "المسار موجود مسبقاً ويُستخدم في لوحة الإدارة. سنجري اختبار تأكيدي."
+      - working: true
+        agent: "testing"
+        comment: "✅ DELETE /api/orders/{id} working correctly. Successfully deletes orders and returns 404 when trying to access deleted order. API responds with 200 status and proper error handling."
 
 ## frontend:
   - task: "تحسين وسم عرض محدود ليكون أوضح على الحاسوب والجوال"
