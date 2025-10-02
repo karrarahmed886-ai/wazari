@@ -292,8 +292,8 @@ async def create_order(order_data: OrderCreateFlex):
 
     return order.dict().dict()
 
-@api_router.get("/orders", response_model=List[Order])
-async def get_orders(status: Optional[OrderStatus] = None):
+@api_router.get("/orders")
+async def get_orders(status: Optional[str] = None):
     query = {}
     if status:
         query["status"] = status
