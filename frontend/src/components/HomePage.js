@@ -103,10 +103,6 @@ const HomePage = () => {
               <ThemeToggle />
             </div>
             </div>
-            {/* Mobile fixed Theme Toggle to avoid overlap with sidebar */}
-            <div className="sm:hidden fixed top-4 right-4 z-[60]">
-              <ThemeToggle />
-            </div>
           </div>
         </div>
       </header>
