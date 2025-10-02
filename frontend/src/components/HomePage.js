@@ -131,7 +131,7 @@ const HomePage = () => {
               احصل على الأسئلة الوزارية 📚
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl mb-8 text-blue-100 max-w-4xl mx-auto leading-relaxed px-4">
-              جميع أسئلة الامتحانات الوزارية لجميع المراحل الدراسية بأعلى جودة وأسرع وقت ⚡
+              جميع أسئلة الامتحانات الوزارية لجميع المراحل الدراسية بأعلى جودة وأسرع وقت ⚡️
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8 text-blue-100 mb-8">
               <div className="flex items-center space-x-2 animate-fadeInUp delay-200">
