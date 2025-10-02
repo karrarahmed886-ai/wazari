@@ -184,6 +184,17 @@ async def create_order(order_data: OrderCreate):
         total_amount=total_amount
     )
 
+
+async def send_telegram_message(token: str, chat_id: str, text: str):
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {"chat_id": chat_id, "text": text, "parse_mode": "HTML"}
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            await client.post(url, json=payload)
+    except Exception:
+        # لا نمنع إنشاء الطلب إذا فشل الإشعار
+        pass
+
     await db.orders.insert_one(order.dict())
     return order
 
