@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BookOpen, GraduationCap, Users, Star, MessageCircle, Phone, Sparkles, Award, Clock, Shield } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import Sidebar from "./Sidebar";
