@@ -32,6 +32,15 @@ const HomePage = () => {
     navigate(`/subjects/${encodeURIComponent(gradeValue)}`);
   };
 
+  const scrollToGrades = () => {
+    setTimeout(() => {
+      const gradesSection = document.getElementById('grades-section');
+      if (gradesSection) {
+        gradesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
   const gradeIcons = {
     "السادس ابتدائي": "👦",
     "الثالث متوسط": "🧑‍🎓", 
