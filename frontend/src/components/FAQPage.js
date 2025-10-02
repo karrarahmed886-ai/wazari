@@ -44,7 +44,11 @@ const FAQPage = () => {
             <p className="whitespace-pre-line leading-8 text-gray-900 dark:text-white select-none">
 👤 : شكد اسعاركم؟ وليش رخيصة؟ 🤔
 ج/ الأسعار مذكورة في الباقات الحالية.
-اضغط هنا للانتقال إلى الباقات 👉 وسيتم تمريرك لقسم الأسعار تلقائياً.
+</p>
+            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({behavior:'smooth'})} className="mt-2 inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg select-none">
+              اضغط هنا للانتقال إلى الباقات
+            </button>
+            <p className="whitespace-pre-line leading-8 text-gray-900 dark:text-white select-none mt-3">
 الأسعار بسبب العروض الي يقدمها استاذ كرار اللي تميزة عن غيرة لكن كل ما تقترب الإمتحانات راح تغلى ف ننصح الطلاب كل ما يستعجلون كل ما سيطرت على المادة ✔️
             </p>
           </div>
