@@ -330,7 +330,7 @@ const HomePage = () => {
               <p className="text-gray-600 dark:text-gray-300">تصلك الأسئلة فوراً بعد تأكيد الدفع</p>
             </div>
             
-            <div className="text-center group">
+            <div className="text-center group relative">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <MessageCircle className="w-8 h-8 text-purple-600 dark:text-purple-400" />
               </div>
