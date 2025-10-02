@@ -302,7 +302,7 @@ const SubjectsPage = () => {
       </div>
       
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar showToggle={false} />
     </div>
   );
 };
