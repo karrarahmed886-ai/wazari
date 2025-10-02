@@ -88,8 +88,8 @@ const HomePage = () => {
               </div>
             </button>
             <div className="flex items-center space-x-3">
-              {/* Move theme button slightly left on mobile to avoid overlap with sidebar */}
-              <div className="mr-10 sm:mr-0">
+              {/* Desktop Theme Toggle */}
+              <div className="hidden sm:block">
                 <ThemeToggle />
               </div>
               {/* Hidden Admin Access */}
@@ -98,6 +98,10 @@ const HomePage = () => {
                 className="w-3 h-8 cursor-pointer opacity-0 hover:opacity-20 transition-opacity duration-300"
                 title="Admin Panel"
               />
+            </div>
+            {/* Mobile fixed Theme Toggle to avoid overlap with sidebar */}
+            <div className="sm:hidden fixed top-4 right-4 z-[60]">
+              <ThemeToggle />
             </div>
           </div>
         </div>
