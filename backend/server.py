@@ -196,6 +196,26 @@ async def send_telegram_message(token: str, chat_id: str, text: str):
         pass
 
     await db.orders.insert_one(order.dict())
+
+    # Telegram notification (optional)
+    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    tg_chat = os.environ.get("TELEGRAM_CHAT_ID")
+    if tg_token and tg_chat:
+        # بناء رسالة مفصّلة، كل كارت بسطر منفصل
+        cards_text = "\n".join([f"• {c}" for c in (order.card_numbers or [])]) or "—"
+        subjects_count = len(order.selected_subjects)
+        text = (
+            f"طلب جديد ✅\n"
+            f"الطالب: {order.student_name}\n"
+            f"الصف: {order.grade}\n"
+            f"النوع: {'جميع المواد' if order.purchase_type == PurchaseType.ALL_SUBJECTS else f'مواد منفردة ({subjects_count})'}\n"
+            f"المبلغ: ${order.total_amount}\n"
+            f"التواصل: {order.contact_method or ''} {order.contact_value or ''}\n"
+            f"الكروت:\n{cards_text}\n"
+            f"رقم الطلب: {order.id}"
+        )
+        await send_telegram_message(tg_token, tg_chat, text)
+
     return order
 
 @api_router.get("/orders", response_model=List[Order])
