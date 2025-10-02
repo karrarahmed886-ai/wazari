@@ -109,29 +109,41 @@ const Sidebar = () => {
             )}
           </div>
 
-          {/* Contact */}
-          <button
-            onClick={() => {
-              document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
-              setIsOpen(false);
-            }}
-            className="w-full flex items-center px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors"
-          >
-            <Phone className="w-5 h-5 ml-3" />
-            <span className="font-medium">تواصل معنا</span>
-          </button>
-
-          {/* Official Channel */}
-          <button
-            onClick={() => {
-              window.open('https://t.me/SS_5xn', '_blank');
-              setIsOpen(false);
-            }}
-            className="w-full flex items-center px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors"
-          >
-            <MessageCircle className="w-5 h-5 ml-3" />
-            <span className="font-medium">قناتنا الرسمية</span>
-          </button>
+          {/* Contact dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setShowGradesMenu(false)}
+              className="w-full flex items-center justify-between px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div className="flex items-center">
+                <Phone className="w-5 h-5 ml-3" />
+                <span className="font-medium">تواصل معنا</span>
+              </div>
+              <ChevronDown className="w-4 h-4" />
+            </button>
+            <div className="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => {
+                  window.open('https://t.me/KAHRKM', '_blank');
+                  setIsOpen(false);
+                }}
+                className="w-full flex items-center px-12 py-3 text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors text-sm"
+              >
+                <span className="text-lg ml-2">👨🏻‍🏫</span>
+                <span>الأستاذ كرار فاضل</span>
+              </button>
+              <button
+                onClick={() => {
+                  window.open('https://t.me/SS_5XN', '_blank');
+                  setIsOpen(false);
+                }}
+                className="w-full flex items-center px-12 py-3 text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors text-sm"
+              >
+                <span className="text-lg ml-2">📣</span>
+                <span>قناتنا الرسمية</span>
+              </button>
+            </div>
+          </div>
 
           {/* My Orders */}
           <button
