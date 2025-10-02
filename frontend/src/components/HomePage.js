@@ -163,7 +163,12 @@ const HomePage = () => {
       {/* Features Section - Removed duplicate */}
 
       {/* Pricing Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <section className="py-16 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-indigo-900/30 dark:to-purple-900/50 transition-colors duration-300 relative">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-blue-200 dark:bg-blue-800 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-200 dark:bg-purple-800 rounded-full blur-3xl"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">الأسعار</h2>
