@@ -16,7 +16,9 @@ const CheckoutPage = () => {
     studentName: "",
     contactMethod: "telegram", // telegram, whatsapp, email
     contactValue: "",
-    cardNumber: ""
+    cardNumber: "",
+    secondCardNumber: "",
+    useSecondCard: false
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
