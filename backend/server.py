@@ -103,12 +103,14 @@ DEFAULT_SUBJECTS = {
 
 # Initialize default subjects
 async def init_default_subjects():
-    existing_subjects = await db.subjects.find().to_list(1000)
-    if not existing_subjects:
-        for grade, subjects in DEFAULT_SUBJECTS.items():
-            for subject_name in subjects:
-                subject = Subject(name=subject_name, grade=grade)
-                await db.subjects.insert_one(subject.dict())
+    # Clear existing subjects first
+    await db.subjects.delete_many({})
+    
+    # Add new subjects according to the updated structure
+    for grade, subjects in DEFAULT_SUBJECTS.items():
+        for subject_name in subjects:
+            subject = Subject(name=subject_name, grade=grade)
+            await db.subjects.insert_one(subject.dict())
 
 # Routes
 @api_router.get("/")
