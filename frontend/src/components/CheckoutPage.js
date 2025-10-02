@@ -126,7 +126,8 @@ const CheckoutPage = () => {
         return k;
       })();
 
-      const orderPayload = {
+      // Prefer modern payload (array of cards)
+      const modernPayload = {
         student_name: formData.studentName,
         telegram_username: formData.contactMethod === "telegram" ? formData.contactValue : "",
         phone_number: formData.contactMethod === "whatsapp" ? formData.contactValue : "",
@@ -140,12 +141,27 @@ const CheckoutPage = () => {
         card_numbers: formData.cards.map(card => card.number.replace(/\s/g, "")).filter(num => num)
       };
 
-      const response = await axios.post(`${API}/orders`, orderPayload);
+      let response;
+      try {
+        response = await axios.post(`${API}/orders`, modernPayload);
+      } catch (e1) {
+        // Fallback: legacy payload (single string)
+        const legacyPayload = {
+          student_name: formData.studentName,
+          telegram_username: modernPayload.telegram_username,
+          phone_number: modernPayload.phone_number,
+          grade: orderData.grade,
+          purchase_type: orderData.purchaseType,
+          selected_subjects: orderData.selected_subjects || orderData.selectedSubjects,
+          card_number: modernPayload.card_numbers.join(',')
+        };
+        response = await axios.post(`${API}/orders`, legacyPayload);
+      }
       
       navigate('/success', { state: { orderId: response.data.id } });
     } catch (error) {
       console.error("Error creating order:", error);
-      alert("حدث خطأ في إرسال الطلب. يرجى المحاولة مرة أخرى.");
+      alert("حدث خطأ في إرسال الطلب. يرجى التأكد من البيانات والمحاولة مرة أخرى.");
     } finally {
       setLoading(false);
       setShowConfirmation(false);
