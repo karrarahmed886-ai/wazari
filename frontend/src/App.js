@@ -24,6 +24,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/subjects/:grade" element={<SubjectsPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/orders" element={<OrdersPage />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/admin" element={<ProtectedAdmin />} />
           </Routes>
