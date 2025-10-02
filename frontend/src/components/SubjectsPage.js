@@ -295,6 +295,9 @@ const SubjectsPage = () => {
           </button>
         </div>
       </div>
+      
+      {/* Sidebar */}
+      <Sidebar />
     </div>
   );
 };
