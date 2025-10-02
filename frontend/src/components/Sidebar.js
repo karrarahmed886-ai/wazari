@@ -83,7 +83,7 @@ const Sidebar = () => {
           {/* Order Now with Dropdown */}
           <div className="relative">
             <button
-              onClick={() => setShowGradesMenu(!showGradesMenu)}
+              onClick={() => { setShowGradesMenu(!showGradesMenu); setShowContactMenu(false); }}
               className="w-full flex items-center justify-between px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors"
             >
               <div className="flex items-center">
