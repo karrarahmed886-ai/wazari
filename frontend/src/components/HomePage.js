@@ -389,7 +389,7 @@ const HomePage = () => {
             </div>
             <div className="border-t border-gray-700 pt-6">
               <p className="text-gray-400 mb-2">
-                جميع الحقوق محفوظة © 2024 - موقع الأسئلة الوزارية
+                جميع الحقوق محفوظة © 2025 - موقع الأسئلة الوزارية
               </p>
               <p className="text-gray-500 text-sm">
                 نتمنى لجميع الطلاب التوفيق والنجاح في مسيرتهم التعليمية 🎓
