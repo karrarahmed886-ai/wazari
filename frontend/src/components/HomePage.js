@@ -348,7 +348,7 @@ const HomePage = () => {
           <div className="animate-fadeInUp">
             <h2 className="text-4xl font-bold mb-4">تواصل معنا</h2>
             <p className="text-xl mb-8 text-white/90">نحن هنا لمساعدتك في رحلتك التعليمية</p>
-            <div className="flex flex_col md:flex-row items-center justify-center gap-6">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               <a
                 href="https://t.me/SS_5XN"
                 target="_blank"
