@@ -143,7 +143,7 @@ const CheckoutPage = () => {
 
       let response;
       try {
-        response = await axios.post(`${API}/orders`, modernPayload, { timeout: 15000 });
+        response = await axios.post(`${API}/orders/simple`, modernPayload, { timeout: 15000 });
       } catch (e1) {
         // Fallback: legacy payload (single string)
         const legacyPayload = {
