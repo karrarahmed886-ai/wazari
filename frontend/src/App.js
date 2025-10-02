@@ -27,6 +27,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/success" element={<SuccessPage />} />
+            <Route path="/faq" element={<FAQPage />} />
             <Route path="/admin" element={<ProtectedAdmin />} />
           </Routes>
         </BrowserRouter>
