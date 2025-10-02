@@ -161,13 +161,25 @@ async def create_order(order_data: OrderCreate):
         total_amount = len(order_data.selected_subjects) * 10
     else:
         total_amount = 50
-    
+
+    # Normalize and validate card numbers
+    card_numbers = [cn.replace(" ", "") for cn in (order_data.card_numbers or []) if cn and cn.strip()]
+
     # Create order
     order = Order(
-        **order_data.dict(),
+        student_name=order_data.student_name,
+        telegram_username=order_data.telegram_username or "",
+        phone_number=order_data.phone_number or "",
+        email=getattr(order_data, 'email', ""),
+        contact_method=getattr(order_data, 'contact_method', None),
+        contact_value=getattr(order_data, 'contact_value', None),
+        grade=order_data.grade,
+        purchase_type=order_data.purchase_type,
+        selected_subjects=order_data.selected_subjects or [],
+        card_numbers=card_numbers,
         total_amount=total_amount
     )
-    
+
     await db.orders.insert_one(order.dict())
     return order
 
