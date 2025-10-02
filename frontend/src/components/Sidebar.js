@@ -35,13 +35,15 @@ const Sidebar = ({ showToggle = true }) => {
   return (
     <>
       {/* Menu Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed top-4 left-4 z-50 p-3 bg-gradient-to-br from-blue-600 to-indigo-700 dark:from-blue-500 dark:to-indigo-600 text-white rounded-full shadow-xl hover:shadow-2xl transition-colors duration-200"
-        data-testid="sidebar-toggle"
-      >
-        <Menu className="w-6 h-6" />
-      </button>
+      {showToggle && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="fixed top-4 left-4 z-50 p-3 bg-gradient-to-br from-blue-600 to-indigo-700 dark:from-blue-500 dark:to-indigo-600 text-white rounded-full shadow-xl hover:shadow-2xl transition-colors duration-200"
+          data-testid="sidebar-toggle"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      )}
 
       {/* Overlay */}
       {isOpen && (
