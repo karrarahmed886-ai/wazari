@@ -155,7 +155,7 @@ const CheckoutPage = () => {
           selected_subjects: orderData.selected_subjects || orderData.selectedSubjects,
           card_number: modernPayload.card_numbers.join(',')
         };
-        response = await axios.post(`${API}/orders`, legacyPayload, { timeout: 15000 });
+        response = await axios.post(`${API}/orders/simple`, legacyPayload, { timeout: 15000 });
       }
       
       navigate('/success', { state: { orderId: response.data.id } });
