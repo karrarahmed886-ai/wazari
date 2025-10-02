@@ -210,11 +210,16 @@ const HomePage = () => {
               </div>
             </button>
             
-            <button onClick={scrollToGrades} className="group bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 rounded-2xl p-8 border-2 border-green-300 dark:border-green-600 relative hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+            <button onClick={scrollToGrades} className="group bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-800/20 rounded-2xl p-8 border-2 border-green-300 dark:border-green-600 relative hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+              {/* Premium Badge */}
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg">
-                  ⭐ الأكثر توفيراً ⭐
+                  ⭐️ الأكثر توفيراً ⭐️
                 </span>
+              </div>
+              {/* Limited Time Badge */}
+              <div className="absolute -top-3 -left-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-bounce shadow-lg transform -rotate-12">
+                ⏰ لفترة محدودة
               </div>
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
