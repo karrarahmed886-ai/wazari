@@ -164,7 +164,7 @@ const HomePage = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-16 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-indigo-900/30 dark:to-purple-900/50 transition-colors duration-300 relative">
+      <section id="pricing" className="py-16 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-indigo-900/30 dark:to-purple-900/50 transition-colors duration-300 relative">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5 dark:opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-blue-200 dark:bg-blue-800 rounded-full blur-3xl"></div>
