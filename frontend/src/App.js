@@ -10,6 +10,7 @@ import SecurityProtection from "./components/SecurityProtection";
 import HomePage from "./components/HomePage";
 import SubjectsPage from "./components/SubjectsPage";
 import CheckoutPage from "./components/CheckoutPage";
+import OrdersPage from "./components/OrdersPage";
 import ProtectedAdmin from "./components/ProtectedAdmin";
 import SuccessPage from "./components/SuccessPage";
 
