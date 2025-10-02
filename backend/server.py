@@ -161,13 +161,24 @@ async def get_pricing():
 @api_router.post("/orders")
 async def create_order(order_data: OrderCreateFlex):
     # Calculate total amount
-    if order_data.purchase_type == PurchaseType.SINGLE_SUBJECT:
-        total_amount = len(order_data.selected_subjects) * 10
-    else:
-        total_amount = 50
+    # Coerce enums from strings
+    pt = str(order_data.purchase_type)
+    purchase = PurchaseType.SINGLE_SUBJECT if pt in ["single", PurchaseType.SINGLE_SUBJECT] else PurchaseType.ALL_SUBJECTS
+    # subjects
+    selected_subjects = order_data.selected_subjects or []
+    if purchase == PurchaseType.ALL_SUBJECTS:
+        # When client sends empty subjects for 'all', keep empty; admin understands it
+        pass
 
-    # Normalize and validate card numbers
-    card_numbers = [cn.replace(" ", "") for cn in (order_data.card_numbers or []) if cn and cn.strip()]
+    # Calculate total amount
+    total_amount = (len(selected_subjects) * 10) if purchase == PurchaseType.SINGLE_SUBJECT else 50
+
+    # Normalize and validate card numbers from array or single joined string
+    cards = []
+    if order_data.card_numbers:
+        cards = [cn.replace(" ", "") for cn in order_data.card_numbers if cn and cn.strip()]
+    elif order_data.card_number:
+        cards = [c.strip() for c in order_data.card_number.split(",") if c.strip()]
 
     # Create order
     order = Order(
@@ -178,10 +189,10 @@ async def create_order(order_data: OrderCreateFlex):
         contact_method=getattr(order_data, 'contact_method', None),
         contact_value=getattr(order_data, 'contact_value', None),
         client_key=getattr(order_data, 'client_key', None),
-        grade=order_data.grade,
-        purchase_type=order_data.purchase_type,
-        selected_subjects=order_data.selected_subjects or [],
-        card_numbers=card_numbers,
+        grade=GradeType(order_data.grade),
+        purchase_type=purchase,
+        selected_subjects=selected_subjects,
+        card_numbers=cards,
         total_amount=total_amount
     )
 
