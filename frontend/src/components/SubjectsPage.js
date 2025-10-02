@@ -163,6 +163,11 @@ const SubjectsPage = () => {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {fallback && (
+          <div className="mb-6 p-3 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 text-sm">
+            ملاحظة: تم عرض المواد محلياً مؤقتاً بسبب انقطاع مؤقت في الخادم. يمكنك المتابعة بشكل طبيعي.
+          </div>
+        )}
         {/* Grade Title */}
         <div className="text-center mb-12 animate-fadeInUp">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
