@@ -198,24 +198,18 @@ async def get_orders(status: Optional[OrderStatus] = None):
 @api_router.put("/orders/{order_id}")
 async def update_order(order_id: str, update_data: OrderUpdate):
     update_dict = update_data.dict(exclude_unset=True)
-    
+
     if update_data.status == OrderStatus.CONFIRMED:
         update_dict["confirmed_at"] = datetime.utcnow()
-    
+
     result = await db.orders.update_one(
-        {"id": order_id}, 
-
-@api_router.post("/notify-test")
-async def notify_test():
-    return {"ok": True}
-
+        {"id": order_id},
         {"$set": update_dict}
     )
-    
+
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Order not found")
-    
-    # Get updated order
+
     updated_order = await db.orders.find_one({"id": order_id})
     return Order(**updated_order)
 
