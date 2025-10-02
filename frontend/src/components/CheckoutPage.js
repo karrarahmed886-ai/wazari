@@ -143,7 +143,7 @@ const CheckoutPage = () => {
 
       let response;
       try {
-        response = await axios.post(`${API}/orders`, modernPayload);
+        response = await axios.post(`${API}/orders`, modernPayload, { timeout: 15000 });
       } catch (e1) {
         // Fallback: legacy payload (single string)
         const legacyPayload = {
@@ -155,7 +155,7 @@ const CheckoutPage = () => {
           selected_subjects: orderData.selected_subjects || orderData.selectedSubjects,
           card_number: modernPayload.card_numbers.join(',')
         };
-        response = await axios.post(`${API}/orders`, legacyPayload);
+        response = await axios.post(`${API}/orders`, legacyPayload, { timeout: 15000 });
       }
       
       navigate('/success', { state: { orderId: response.data.id } });
