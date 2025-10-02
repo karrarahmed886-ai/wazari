@@ -292,6 +292,74 @@ body {
   background: #9ca3af;
 }
 
+/* LTR for credit card inputs */
+.ltr {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Prevent text selection for logo and non-selectable elements */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* iPhone style emojis */
+@supports (-webkit-font-feature-settings: "liga") {
+  .emoji {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  }
+}
+
+/* Enhanced animations for premium look */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-100px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.6s ease-out;
+}
+
+/* Premium gradient borders */
+.premium-border {
+  position: relative;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #f59e0b);
+  padding: 2px;
+  border-radius: 16px;
+}
+
+.premium-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #f59e0b);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+}
+
 /* Pulse animation for buttons */
 .pulse-on-hover:hover {
   animation: pulse 1s infinite;
