@@ -16,6 +16,7 @@ import {
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showGradesMenu, setShowGradesMenu] = useState(false);
+  const [showContactMenu, setShowContactMenu] = useState(false);
   const navigate = useNavigate();
 
   const grades = [
