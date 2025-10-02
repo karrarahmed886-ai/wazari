@@ -57,6 +57,28 @@ const AdminPage = () => {
     }
   };
 
+  const handleDeleteOrder = async (orderId) => {
+    if (!window.confirm("هل أنت متأكد من حذف هذا الطلب؟ لا يمكن التراجع عن هذا الإجراء.")) {
+      return;
+    }
+
+    setUpdating(true);
+    try {
+      await axios.delete(`${API}/orders/${orderId}`);
+      
+      // Remove from local state
+      setOrders(prev => prev.filter(order => order.id !== orderId));
+      
+      setSelectedOrder(null);
+      alert("تم حذف الطلب بنجاح");
+    } catch (error) {
+      console.error("Error deleting order:", error);
+      alert("حدث خطأ في حذف الطلب");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case "pending": return "bg-yellow-100 text-yellow-800";
