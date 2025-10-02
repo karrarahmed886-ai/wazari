@@ -174,7 +174,11 @@ const HomePage = () => {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <button onClick={scrollToGrades} className="group bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500">
+            <button onClick={scrollToGrades} className="group bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-700 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
+              {/* Limited Offer Badge */}
+              <div className="absolute -top-3 -right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-1 rounded-full text-xs font-bold animate-pulse shadow-lg transform rotate-12">
+                🔥 عرض محدود
+              </div>
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <BookOpen className="w-10 h-10 text-white" />
