@@ -66,14 +66,19 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-3 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-xl shadow-lg">
-                <BookOpen className="h-8 w-8 text-white" />
+              <div className="relative">
+                <div className="p-3 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-2xl shadow-xl">
+                  <BookOpen className="h-8 w-8 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
               </div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
-                  الأسئلة الوزارية
+                  📚 الأسئلة الوزارية 🎓
                 </h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400">بإشراف الأستاذ كرار فاضل</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                  ⭐ بإشراف الأستاذ كرار فاضل ⭐
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
