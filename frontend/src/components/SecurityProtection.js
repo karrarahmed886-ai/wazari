@@ -54,29 +54,13 @@ const SecurityProtection = () => {
       }
     };
 
-    // Anti-debugging techniques
-    const antiDebug = () => {
-      setInterval(() => {
-        console.clear();
-        console.log('%c🚫 الوصول غير مسموح', 'color: red; font-size: 50px; font-weight: bold;');
-      }, 1000);
-      
-      // Clear console periodically
-      setInterval(() => {
-        console.clear();
-      }, 100);
-    };
-
     // Add event listeners
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('keydown', handleKeyDown);
-    
-    // Start anti-debug
-    antiDebug();
-    
-    // Check for DevTools every 500ms
-    const devToolsInterval = setInterval(detectDevTools, 500);
-    
+
+    // خففنا إجراءات الحماية لتجنب تعارضات المتصفحات على الجوال
+    const devToolsInterval = setInterval(detectDevTools, 2000);
+
     // Cleanup
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
