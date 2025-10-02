@@ -73,7 +73,7 @@ class Order(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     confirmed_at: Optional[datetime] = None
 
-class OrderCreate(BaseModel):
+class OrderCreateFlex(BaseModel):
     student_name: str
     telegram_username: Optional[str] = ""
     phone_number: Optional[str] = ""
@@ -81,10 +81,11 @@ class OrderCreate(BaseModel):
     contact_method: Optional[str] = None
     contact_value: Optional[str] = None
     client_key: Optional[str] = None
-    grade: GradeType
-    purchase_type: PurchaseType
-    selected_subjects: List[str] = []
-    card_numbers: List[str] = []
+    grade: str
+    purchase_type: str
+    selected_subjects: Optional[List[str]] = []
+    card_numbers: Optional[List[str]] = None
+    card_number: Optional[str] = None
 
 class OrderUpdate(BaseModel):
     status: OrderStatus
