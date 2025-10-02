@@ -192,15 +192,18 @@
         comment: "✅ Orders page loads correctly and shows user-specific filtering. Page displays appropriate empty state or filtered orders based on client_key from localStorage. Client-specific order filtering is working as expected."
   - task: "تعديل الشريط الجانبي: حذف زر قناتنا الرسمية وإضافة قائمة منسدلة لتواصل معنا"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/Sidebar.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "إضافة قائمة منسدلة تحتوي: الأستاذ كرار فاضل + قناتنا الرسمية."
+      - working: true
+        agent: "testing"
+        comment: "✅ Sidebar contact dropdown working correctly. 'تواصل معنا' button expands to show dropdown with both 'الأستاذ كرار فاضل' and 'قناتنا الرسمية' items. Grade submenu ('اطلب الآن') also expands/collapses properly. Old standalone channel button has been removed."
   - task: "اتساق إرسال الطلب مع الباكेंड الحالي (حقل card_number فقط)"
     implemented: true
     working: "NA"
