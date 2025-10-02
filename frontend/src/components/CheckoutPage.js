@@ -265,6 +265,7 @@ const CheckoutPage = () => {
                     <li className="font-semibold">🔴 سيتم التحقق من الأرقام قبل التأكيد</li>
                     <li className="font-semibold">🔴 ستصلك الأسئلة فوراً بعد التأكيد</li>
                     <li className="font-semibold">🔴 لا تشارك أرقام الكروت مع أحد</li>
+                    <li className="font-extrabold text-red-700 dark:text-red-300">❗ في حال إرسال رصيد وهمي يحق لنا حظرك من الموقع نهائياً</li>
                   </ul>
                 </div>
               </div>
