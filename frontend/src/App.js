@@ -13,6 +13,7 @@ import CheckoutPage from "./components/CheckoutPage";
 import OrdersPage from "./components/OrdersPage";
 import ProtectedAdmin from "./components/ProtectedAdmin";
 import SuccessPage from "./components/SuccessPage";
+import FAQPage from "./components/FAQPage";
 
 function App() {
   return (
