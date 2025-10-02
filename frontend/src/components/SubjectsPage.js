@@ -16,6 +16,7 @@ const SubjectsPage = () => {
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [purchaseType, setPurchaseType] = useState("single");
   const [loading, setLoading] = useState(true);
+  const [fallback, setFallback] = useState(false);
 
   const gradeNames = {
     "السادس ابتدائي": "السادس ابتدائي",
