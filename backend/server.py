@@ -175,6 +175,7 @@ async def create_order(order_data: OrderCreate):
         email=getattr(order_data, 'email', ""),
         contact_method=getattr(order_data, 'contact_method', None),
         contact_value=getattr(order_data, 'contact_value', None),
+        client_key=getattr(order_data, 'client_key', None),
         grade=order_data.grade,
         purchase_type=order_data.purchase_type,
         selected_subjects=order_data.selected_subjects or [],
