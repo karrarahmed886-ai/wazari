@@ -249,7 +249,12 @@ const HomePage = () => {
       </section>
 
       {/* Grades Selection */}
-      <section id="grades-section" className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
+      <section id="grades-section" className="py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-900 dark:via-gray-800 dark:to-indigo-900/30 transition-colors duration-300 relative">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-gradient-to-br from-blue-100/20 to-purple-100/20 dark:from-blue-900/10 dark:to-purple-900/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-br from-indigo-100/20 to-pink-100/20 dark:from-indigo-900/10 dark:to-pink-900/10 rounded-full blur-3xl"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">اختر صفك الدراسي</h2>
