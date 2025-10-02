@@ -129,11 +129,16 @@ const SubjectsPage = () => {
               <span>العودة للرئيسية</span>
             </button>
             <div className="flex items-center space-x-3">
-              <ThemeToggle />
+              <div className="hidden sm:block">
+                <ThemeToggle />
+              </div>
               <div className="flex items-center space-x-3">
                 <BookOpen className="h-8 w-8 text-blue-600 dark:text-blue-400" />
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">الأسئلة الوزارية</h1>
               </div>
+            </div>
+            <div className="sm:hidden fixed top-4 right-4 z-[60]">
+              <ThemeToggle />
             </div>
           </div>
         </div>
