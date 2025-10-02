@@ -377,7 +377,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className="p-3 bg-gradient_to-br from-blue-500 via-indigo-600 to-purple-600 rounded-xl">
+              <div className="p-3 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-xl">
                 <BookOpen className="h-8 w-8 text-white" />
               </div>
               <div className="text-right">
