@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowRight, CreditCard, MessageCircle, Phone, User, AlertCircle, Mail } from "lucide-react";
+import { ArrowRight, CreditCard, MessageCircle, Phone, User, AlertTriangle, Mail, Plus, Minus } from "lucide-react";
 import SecurityProtection from "./SecurityProtection";
+import Sidebar from "./Sidebar";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -16,12 +17,11 @@ const CheckoutPage = () => {
     studentName: "",
     contactMethod: "telegram", // telegram, whatsapp, email
     contactValue: "",
-    cardNumber: "",
-    secondCardNumber: "",
-    useSecondCard: false
+    cards: [{ number: "" }] // Array of cards
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   if (!orderData) {
     navigate('/');
@@ -39,6 +39,34 @@ const CheckoutPage = () => {
       setErrors(prev => ({
         ...prev,
         [name]: ""
+      }));
+    }
+  };
+
+  const handleCardChange = (index, value) => {
+    const newCards = [...formData.cards];
+    newCards[index].number = value;
+    setFormData(prev => ({
+      ...prev,
+      cards: newCards
+    }));
+  };
+
+  const addCard = () => {
+    if (formData.cards.length < 5) { // Maximum 5 cards
+      setFormData(prev => ({
+        ...prev,
+        cards: [...prev.cards, { number: "" }]
+      }));
+    }
+  };
+
+  const removeCard = (index) => {
+    if (formData.cards.length > 1) {
+      const newCards = formData.cards.filter((_, i) => i !== index);
+      setFormData(prev => ({
+        ...prev,
+        cards: newCards
       }));
     }
   };
@@ -65,11 +93,18 @@ const CheckoutPage = () => {
       }
     }
     
-    if (!formData.cardNumber.trim()) {
-      newErrors.cardNumber = "رقم كارت الرصيد مطلوب";
-    } else if (!/^\d{12,16}$/.test(formData.cardNumber.replace(/\s/g, ""))) {
-      newErrors.cardNumber = "رقم الكارت غير صحيح (12-16 رقم)";
+    // Validate at least one card
+    const validCards = formData.cards.filter(card => card.number.trim());
+    if (validCards.length === 0) {
+      newErrors.cards = "يجب إدخال رقم كارت رصيد واحد على الأقل";
     }
+
+    // Validate individual cards
+    formData.cards.forEach((card, index) => {
+      if (card.number.trim() && !/^\d{12,16}$/.test(card.number.replace(/\s/g, ""))) {
+        newErrors[`card_${index}`] = "رقم الكارت غير صحيح (12-16 رقم)";
+      }
+    });
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -79,7 +114,10 @@ const CheckoutPage = () => {
     e.preventDefault();
     
     if (!validateForm()) return;
+    setShowConfirmation(true);
+  };
 
+  const confirmOrder = async () => {
     setLoading(true);
     try {
       const orderPayload = {
@@ -92,7 +130,7 @@ const CheckoutPage = () => {
         grade: orderData.grade,
         purchase_type: orderData.purchaseType,
         selected_subjects: orderData.selectedSubjects,
-        card_number: formData.cardNumber.replace(/\s/g, "")
+        card_numbers: formData.cards.map(card => card.number.replace(/\s/g, "")).filter(num => num)
       };
 
       const response = await axios.post(`${API}/orders`, orderPayload);
@@ -103,6 +141,7 @@ const CheckoutPage = () => {
       alert("حدث خطأ في إرسال الطلب. يرجى المحاولة مرة أخرى.");
     } finally {
       setLoading(false);
+      setShowConfirmation(false);
     }
   };
 
@@ -141,6 +180,7 @@ const CheckoutPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-indigo-900 transition-colors duration-300">
       <SecurityProtection />
+      <Sidebar />
       
       {/* Header */}
       <header className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700">
@@ -190,16 +230,18 @@ const CheckoutPage = () => {
               </div>
             </div>
 
-            <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4">
+            {/* Critical Payment Instructions */}
+            <div className="bg-red-50 dark:bg-red-900/30 rounded-lg p-4 border-l-4 border-red-500">
               <div className="flex items-start space-x-3">
-                <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <div className="text-blue-800 dark:text-blue-200 text-sm">
-                  <p className="font-medium mb-1">تعليمات الدفع:</p>
-                  <ul className="space-y-1">
-                    <li>• استخدم كارت رصيد آسياسيل فقط</li>
-                    <li>• تأكد من صحة الرقم المدخل</li>
-                    <li>• سيتم التأكيد خلال دقائق</li>
-                    <li>• ستصلك الأسئلة حسب طريقة التواصل المختارة</li>
+                <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
+                <div className="text-red-800 dark:text-red-200">
+                  <p className="font-bold mb-2 text-lg">⚠️ تعليمات مهمة جداً:</p>
+                  <ul className="space-y-2 text-sm">
+                    <li className="font-semibold">🔴 تأكد من صحة أرقام الكروت قبل الإرسال</li>
+                    <li className="font-semibold">🔴 استخدم كروت رصيد آسياسيل فقط</li>
+                    <li className="font-semibold">🔴 سيتم التحقق من الأرقام قبل التأكيد</li>
+                    <li className="font-semibold">🔴 ستصلك الأسئلة فوراً بعد التأكيد</li>
+                    <li className="font-semibold">🔴 لا تشارك أرقام الكروت مع أحد</li>
                   </ul>
                 </div>
               </div>
@@ -311,87 +353,63 @@ const CheckoutPage = () => {
                 )}
               </div>
 
-              {/* Card Number */}
+              {/* Cards Section */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  <CreditCard className="w-4 h-4 inline mr-2" />
-                  رقم كارت الرصيد الأول (آسياسيل)
-                </label>
-                <input
-                  type="text"
-                  name="cardNumber"
-                  value={formatCardNumber(formData.cardNumber)}
-                  onChange={(e) => {
-                    const numbers = e.target.value.replace(/\D/g, "");
-                    if (numbers.length <= 16) {
-                      handleInputChange({ target: { name: "cardNumber", value: numbers } });
-                    }
-                  }}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white transition-colors ${
-                    errors.cardNumber ? "border-red-500" : "border-gray-300 dark:border-gray-600"
-                  }`}
-                  placeholder="1234 5678 9012 3456"
-                  maxLength="19"
-                  data-testid="card-number"
-                />
-                {errors.cardNumber && (
-                  <p className="text-red-500 text-sm mt-1">{errors.cardNumber}</p>
-                )}
-              </div>
+                <div className="flex items-center justify-between mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <CreditCard className="w-4 h-4 inline mr-2" />
+                    أرقام كروت الرصيد (آسياسيل)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={addCard}
+                    disabled={formData.cards.length >= 5}
+                    className="flex items-center px-3 py-1 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <Plus className="w-4 h-4 mr-1" />
+                    إضافة كارت
+                  </button>
+                </div>
 
-              {/* Second Card Option */}
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <label className="flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="useSecondCard"
-                      checked={formData.useSecondCard}
-                      onChange={handleInputChange}
-                      className="sr-only"
-                    />
-                    <div className={`w-5 h-5 rounded border-2 mr-2 flex items-center justify-center transition-colors ${
-                      formData.useSecondCard 
-                        ? 'border-blue-500 bg-blue-500' 
-                        : 'border-gray-300 dark:border-gray-600'
-                    }`}>
-                      {formData.useSecondCard && (
-                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                <div className="space-y-3">
+                  {formData.cards.map((card, index) => (
+                    <div key={index} className="flex items-center space-x-2">
+                      <div className="flex-1">
+                        <input
+                          type="text"
+                          value={formatCardNumber(card.number)}
+                          onChange={(e) => {
+                            const numbers = e.target.value.replace(/\D/g, "");
+                            if (numbers.length <= 16) {
+                              handleCardChange(index, numbers);
+                            }
+                          }}
+                          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white transition-colors text-left ltr ${
+                            errors[`card_${index}`] ? "border-red-500" : "border-gray-300 dark:border-gray-600"
+                          }`}
+                          placeholder="1234 5678 9012 3456"
+                          maxLength="19"
+                          dir="ltr"
+                          data-testid={`card-number-${index}`}
+                        />
+                        {errors[`card_${index}`] && (
+                          <p className="text-red-500 text-sm mt-1">{errors[`card_${index}`]}</p>
+                        )}
+                      </div>
+                      {formData.cards.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeCard(index)}
+                          className="p-3 text-red-500 hover:text-red-700 transition-colors"
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
                       )}
                     </div>
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      إضافة كارت رصيد ثاني
-                    </span>
-                  </label>
+                  ))}
                 </div>
-                
-                {formData.useSecondCard && (
-                  <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      <CreditCard className="w-4 h-4 inline mr-2" />
-                      رقم كارت الرصيد الثاني
-                    </label>
-                    <input
-                      type="text"
-                      name="secondCardNumber"
-                      value={formatCardNumber(formData.secondCardNumber)}
-                      onChange={(e) => {
-                        const numbers = e.target.value.replace(/\D/g, "");
-                        if (numbers.length <= 16) {
-                          handleInputChange({ target: { name: "secondCardNumber", value: numbers } });
-                        }
-                      }}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-colors"
-                      placeholder="1234 5678 9012 3456"
-                      maxLength="19"
-                      data-testid="second-card-number"
-                    />
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      يمكنك إضافة كارت ثاني إذا كان الأول غير كافي للمبلغ المطلوب
-                    </p>
-                  </div>
+                {errors.cards && (
+                  <p className="text-red-500 text-sm mt-2">{errors.cards}</p>
                 )}
               </div>
 
@@ -408,6 +426,50 @@ const CheckoutPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {showConfirmation && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full animate-bounceIn">
+            <div className="text-center mb-6">
+              <AlertTriangle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                تأكيد الطلب
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                هل أنت متأكد من صحة أرقام كروت الرصيد المدخلة؟
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+              <p className="text-sm text-gray-700 dark:text-gray-300 font-medium mb-2">أرقام الكروت المدخلة:</p>
+              {formData.cards.map((card, index) => (
+                card.number && (
+                  <div key={index} className="text-sm font-mono text-gray-900 dark:text-white bg-white dark:bg-gray-800 p-2 rounded mb-1">
+                    {formatCardNumber(card.number)}
+                  </div>
+                )
+              ))}
+            </div>
+
+            <div className="flex space-x-3">
+              <button
+                onClick={() => setShowConfirmation(false)}
+                className="flex-1 px-4 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg font-medium transition-colors"
+              >
+                مراجعة الرصيد
+              </button>
+              <button
+                onClick={confirmOrder}
+                disabled={loading}
+                className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-lg font-medium disabled:opacity-50 transition-colors"
+              >
+                {loading ? "جاري الإرسال..." : "إكمال الطلب"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
