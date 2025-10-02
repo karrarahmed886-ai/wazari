@@ -67,7 +67,7 @@ const HomePage = () => {
           <div className="flex items-center justify-between">
             <button 
               onClick={() => navigate('/')}
-              className="flex items-center space-x-6 hover:opacity-90 transition-opacity duration-300 select-none"
+              className="flex items-center space-x-6 hover:opacity-90 transition-opacity duration-300 select-none relative"
             >
               <div className="relative group">
                 <div className="p-4 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-700 dark:from-blue-500 dark:via-indigo-600 dark:to-purple-600 rounded-2xl shadow-2xl transform group-hover:scale-110 transition-all duration-300">
