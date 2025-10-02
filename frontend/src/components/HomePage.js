@@ -283,7 +283,7 @@ const HomePage = () => {
                 }}
               >
                 <div className="text-center">
-                  <div className="text-6xl mb-6 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
+                  <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-500">
                     {gradeIcons[grade.value]}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
