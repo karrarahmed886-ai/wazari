@@ -337,6 +337,12 @@ const HomePage = () => {
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">دعم مستمر</h3>
               <p className="text-gray-600 dark:text-gray-300">فريق دعم متاح 24/7 لمساعدتك</p>
             </div>
+            {/* Link to FAQ page */}
+            <div className="text-center mt-6">
+              <button onClick={() => navigate('/faq')} className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 select-none">
+                الانتقال إلى صفحة الأسئلة الشائعة
+              </button>
+            </div>
           </div>
         </div>
       </section>
