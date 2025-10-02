@@ -34,13 +34,11 @@ const OrdersPage = () => {
       const response = await axios.get(`${API}/orders`);
       const all = response.data || [];
       const key = getClientKey();
-      // Filter orders belonging to this client by matching contact_value or a stored key embedded in telegram_username
-      const mine = all.filter(o => {
-        return (o.contact_value && o.contact_value.trim()) || (o.telegram_username && o.telegram_username.includes(key));
-      });
+      // Only show orders that match this device's client key
+      const mine = all.filter(o => o.client_key === key);
       setOrders(mine);
     } catch (error) {
-      console.error("Error fetching orders:");
+      console.error("Error fetching orders:", error);
     } finally {
       setLoading(false);
     }
