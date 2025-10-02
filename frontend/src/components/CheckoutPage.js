@@ -177,7 +177,11 @@ const CheckoutPage = () => {
         }
       }
       
-      navigate('/success', { state: { orderId: response.data.id } });
+      const orderId = response?.data?.id || response?.data?.order?.id;
+      if (!orderId) {
+        throw new Error('INVALID_RESPONSE');
+      }
+      navigate('/success', { state: { orderId } });
     } catch (error) {
       console.error("Error creating order:", error);
       alert("حدث خطأ في إرسال الطلب. يرجى التأكد من البيانات والمحاولة مرة أخرى.");
