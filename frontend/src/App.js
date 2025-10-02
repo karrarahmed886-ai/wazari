@@ -10,7 +10,7 @@ import SecurityProtection from "./components/SecurityProtection";
 import HomePage from "./components/HomePage";
 import SubjectsPage from "./components/SubjectsPage";
 import CheckoutPage from "./components/CheckoutPage";
-import AdminPage from "./components/AdminPage";
+import ProtectedAdmin from "./components/ProtectedAdmin";
 import SuccessPage from "./components/SuccessPage";
 
 function App() {
