@@ -101,9 +101,9 @@ const HomePage = () => {
       <section className="relative bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 dark:from-blue-800 dark:via-indigo-900 dark:to-purple-900 text-white py-16 md:py-20 overflow-hidden">
         {/* Enhanced Animated background elements - Mobile Optimized */}
         <div className="absolute inset-0">
-          {/* Floating emojis - Reduced on mobile */}
+          {/* Floating emojis - iPhone style emojis */}
           <div className="hidden md:block absolute top-16 left-10 text-4xl animate-bounce delay-0">📚</div>
-          <div className="absolute top-8 md:top-32 right-4 md:right-20 text-2xl md:text-3xl animate-pulse delay-1000">⭐</div>
+          <div className="absolute top-8 md:top-32 right-4 md:right-20 text-2xl md:text-3xl animate-pulse delay-1000">⭐️</div>
           <div className="hidden md:block absolute bottom-24 left-1/4 text-3xl animate-ping delay-500">🎓</div>
           <div className="absolute bottom-4 md:bottom-16 right-4 md:right-10 text-3xl md:text-4xl animate-bounce delay-700">📖</div>
           <div className="hidden lg:block absolute top-1/3 left-1/3 text-2xl animate-float delay-300">✨</div>
