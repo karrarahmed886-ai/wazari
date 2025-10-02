@@ -178,15 +178,18 @@
         comment: "✅ Sidebar menu toggle button is static with no pulse/scale animation. Button styles show transform: none and only color transitions, confirming removal of scale animations. Button remains static as required."
   - task: "طلباتي تعرض طلبات المستخدم فقط (باستخدام client key مخزن محلياً)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/OrdersPage.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "توليد client_key في localStorage، تضمينه عند إنشاء الطلب داخل telegram_username، ثم التصفية محلياً للطلبات."
+      - working: true
+        agent: "testing"
+        comment: "✅ Orders page loads correctly and shows user-specific filtering. Page displays appropriate empty state or filtered orders based on client_key from localStorage. Client-specific order filtering is working as expected."
   - task: "تعديل الشريط الجانبي: حذف زر قناتنا الرسمية وإضافة قائمة منسدلة لتواصل معنا"
     implemented: true
     working: "NA"
