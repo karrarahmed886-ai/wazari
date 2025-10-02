@@ -133,6 +133,18 @@ const Sidebar = () => {
             <span className="font-medium">قناتنا الرسمية</span>
           </button>
 
+          {/* My Orders */}
+          <button
+            onClick={() => {
+              navigate('/orders');
+              setIsOpen(false);
+            }}
+            className="w-full flex items-center px-6 py-4 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors"
+          >
+            <ListChecks className="w-5 h-5 ml-3" />
+            <span className="font-medium">طلباتي</span>
+          </button>
+
           {/* About Us */}
           <button
             onClick={() => {
