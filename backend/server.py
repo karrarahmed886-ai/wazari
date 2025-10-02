@@ -57,12 +57,15 @@ class SubjectCreate(BaseModel):
 class Order(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     student_name: str
-    telegram_username: str
-    phone_number: str
+    telegram_username: Optional[str] = ""
+    phone_number: Optional[str] = ""
+    email: Optional[str] = ""
+    contact_method: Optional[str] = None
+    contact_value: Optional[str] = None
     grade: GradeType
     purchase_type: PurchaseType
     selected_subjects: List[str] = []  # Subject IDs for single purchases
-    card_number: str
+    card_numbers: List[str] = []
     total_amount: int  # in USD
     status: OrderStatus = OrderStatus.PENDING
     created_at: datetime = Field(default_factory=datetime.utcnow)
