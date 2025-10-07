@@ -12,21 +12,20 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [grades, setGrades] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showPrepModal, setShowPrepModal] = useState(false);
 
   useEffect(() => {
-    fetchGrades();
+    // استخدم بطاقات محلية ثابتة لضمان الظهور تحت الباقات بغض النظر عن الخادم
+    const localGrades = [
+      { id: "sixth_primary", name: "السادس ابتدائي", value: "السادس ابتدائي" },
+      { id: "third_intermediate", name: "الثالث متوسط", value: "الثالث متوسط" },
+      { id: "sixth_preparatory", name: "السادس إعدادي", value: "السادس إعدادي" }
+    ];
+    setGrades(localGrades);
+    setLoading(false);
   }, []);
 
-  const fetchGrades = async () => {
-    try {
-      const response = await axios.get(`${API}/grades`);
-      setGrades(response.data.grades);
-    } catch (error) {
-      console.error("Error fetching grades:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchGrades = async () => {};
 
   const handleGradeSelect = (gradeValue) => {
     navigate(`/subjects/${encodeURIComponent(gradeValue)}`);
