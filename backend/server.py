@@ -208,16 +208,17 @@ async def create_order_simple(data: dict):
         tg_token = os.environ.get("TELEGRAM_BOT_TOKEN")
         tg_chat = os.environ.get("TELEGRAM_CHAT_ID")
         if tg_token and tg_chat:
-            cards_text = "\n".join([f"• {c}" for c in (order["card_numbers"] or [])]) or "—"
+            cards_text = "\n".join([f"• {c}" for c in (order.get("card_numbers") or [])]) or "—"
+            kind_text = "جميع المواد" if order.get('purchase_type') == 'all' else f"مواد منفردة ({len(order.get('selected_subjects') or [])})"
             text = (
                 f"طلب جديد ✅\n"
-                f"الطالب: {order['student_name']}\n"
-                f"الصف: {order['grade']}\n"
-                f"النوع: {'جميع المواد' if order['purchase_type']=='all' else f'مواد منفردة ({len(order['selected_subjects'])})'}\n"
-                f"المبلغ: ${order['total_amount']}\n"
+                f"الطالب: {order.get('student_name','')}\n"
+                f"الصف: {order.get('grade','')}\n"
+                f"النوع: {kind_text}\n"
+                f"المبلغ: ${order.get('total_amount','')}\n"
                 f"التواصل: {order.get('contact_method','') or ''} {order.get('contact_value','') or ''}\n"
                 f"الكروت:\n{cards_text}\n"
-                f"رقم الطلب: {order['id']}"
+                f"رقم الطلب: {order.get('id','')}"
             )
             try:
                 await send_telegram_message(tg_token, tg_chat, text)
