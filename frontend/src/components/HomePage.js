@@ -28,6 +28,10 @@ const HomePage = () => {
   const fetchGrades = async () => {};
 
   const handleGradeSelect = (gradeValue) => {
+    if (gradeValue === "السادس إعدادي") {
+      setShowPrepModal(true);
+      return;
+    }
     navigate(`/subjects/${encodeURIComponent(gradeValue)}`);
   };
 
