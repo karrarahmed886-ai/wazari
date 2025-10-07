@@ -254,6 +254,20 @@ const HomePage = () => {
                 </ul>
                 <div className="bg-green-600 text-white px-4 py-2 rounded-lg font-bold">
                   اختر الآن 👆
+      {/* Preparatory Track Modal */}
+      {showPrepModal && (
+        <div className="fixed inset-0 bg-black/50 z-[70] flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-sm p-6">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 text-center">اختر الفرع للسادس الإعدادي</h3>
+            <div className="space-y-3">
+              <button onClick={() => { setShowPrepModal(false); navigate(`/subjects/${encodeURIComponent('السادس إعدادي - علمي')}`); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold">السادس إعدادي - علمي</button>
+              <button onClick={() => { setShowPrepModal(false); navigate(`/subjects/${encodeURIComponent('السادس إعدادي - أدبي')}`); }} className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-semibold">السادس إعدادي - أدبي</button>
+            </div>
+            <button onClick={() => setShowPrepModal(false)} className="mt-5 w-full py-2 rounded-md border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300">إلغاء</button>
+          </div>
+        </div>
+      )}
+
                 </div>
               </div>
             </button>
