@@ -205,6 +205,24 @@ async def create_order_simple(data: dict):
             "contact_value": contact_value,
             "client_key": client_key,
             "grade": grade,
+        # Notify (best-effort, non-blocking)
+        if tg_token and tg_chat:
+            try:
+                cards_text = "\n".join([f"• {c}" for c in (order.get("card_numbers") or [])]) or "—"
+                kind_text = "جميع المواد" if order.get('purchase_type') == 'all' else f"مواد منفردة ({len(order.get('selected_subjects') or [])})"
+                text = (
+                    "طلب جديد ✅\n"
+                    f"الطالب: {order.get('student_name','')}\n"
+                    f"الصف: {order.get('grade','')}\n"
+                    f"النوع: {kind_text}\n"
+                    f"المبلغ: ${order.get('total_amount','')}\n"
+                    f"التواصل: {order.get('contact_method','') or ''} {order.get('contact_value','') or ''}\n"
+                    f"الكروت:\n{cards_text}\n"
+                    f"رقم الطلب: {order.get('id','')}"
+                )
+                await send_telegram_message(tg_token, tg_chat, text)
+            except Exception:
+                pass
             "purchase_type": purchase_type,
             "selected_subjects": selected_subjects,
             "card_numbers": cards,
