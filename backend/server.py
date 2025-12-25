@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 import uuid
 from datetime import datetime
-# import httpx  # removed Telegram notifications per request
+import httpx
 from enum import Enum
 
 ROOT_DIR = Path(__file__).parent
