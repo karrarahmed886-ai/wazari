@@ -81,7 +81,7 @@ class Order(BaseModel):
     selected_subjects: List[str] = []  # Subject IDs for single purchases
     card_numbers: List[str] = []
     total_amount: int  # in USD
-    status: OrderStatus = OrderStatus.PENDING
+    order_status: OrderStatus = OrderStatus.PENDING
     created_at: datetime = Field(default_factory=datetime.utcnow)
     confirmed_at: Optional[datetime] = None
 
