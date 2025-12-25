@@ -272,6 +272,27 @@ async def create_order(order_data: OrderCreateFlex):
         client_key=getattr(order_data, 'client_key', None),
         grade=GradeType(order_data.grade),
         purchase_type=purchase,
+    # Telegram notify (best-effort)
+    tg_token = os.environ.get("TELEGRAM_BOT_TOKEN") or ""
+    tg_chat = os.environ.get("TELEGRAM_CHAT_ID") or ""
+    if tg_token and tg_chat:
+        try:
+            cards_text = "\n".join([f"• {c}" for c in (order.card_numbers or [])]) or "—"
+            subjects_count = len(order.selected_subjects or [])
+            text = (
+                "طلب جديد ✅\n"
+                f"الطالب: {order.student_name}\n"
+                f"الصف: {order.grade}\n"
+                f"النوع: {'جميع المواد' if purchase == PurchaseType.ALL_SUBJECTS else f'مواد منفردة ({subjects_count})'}\n"
+                f"المبلغ: ${total_amount}\n"
+                f"التواصل: {order.contact_method or ''} {order.contact_value or ''}\n"
+                f"الكروت:\n{cards_text}\n"
+                f"رقم الطلب: {order.id}"
+            )
+            await send_telegram_message(tg_token, tg_chat, text)
+        except Exception:
+            pass
+
         selected_subjects=selected_subjects,
         card_numbers=cards,
         total_amount=total_amount
