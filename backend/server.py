@@ -162,7 +162,7 @@ async def get_pricing():
 async def create_order_simple(data: dict):
     try:
         # Extract fields with defaults
-        student_name = data.get("student_name", "").strip()
+        student_name = (data.get("student_name") or "").strip()
         telegram_username = (data.get("telegram_username") or "").strip()
         phone_number = (data.get("phone_number") or "").strip()
         email = (data.get("email") or "").strip()
@@ -184,16 +184,6 @@ async def create_order_simple(data: dict):
 
         # Build order dict
         order = {
-
-async def send_telegram_message(token: str, chat_id: str, text: str):
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    payload = {"chat_id": chat_id, "text": text}
-    try:
-        async with httpx.AsyncClient(timeout=10) as client:
-            await client.post(url, json=payload)
-    except Exception:
-        pass
-
             "id": str(uuid.uuid4()),
             "student_name": student_name,
             "telegram_username": telegram_username,
@@ -237,7 +227,7 @@ async def send_telegram_message(token: str, chat_id: str, text: str):
 
         return {"ok": True, "order": order}
     except Exception as e:
-        return {"ok": False, "error": str(e)}, status.HTTP_500_INTERNAL_SERVER_ERROR
+        raise HTTPException(status_code=500, detail=str(e))
 
 @api_router.post("/orders")
 async def create_order(order_data: OrderCreateFlex):
