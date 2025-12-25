@@ -303,7 +303,7 @@ async def create_order(order_data: OrderCreateFlex):
 
     # Telegram sending removed per request
 
-    return order.dict()
+    return order.dict()  # response as JSON
 
 @api_router.get("/orders")
 async def get_orders(status: Optional[str] = None):
