@@ -43,6 +43,18 @@ class PurchaseType(str, Enum):
     ALL_SUBJECTS = "all"
 
 # Models
+
+# Telegram helper
+async def send_telegram_message(token: str, chat_id: str, text: str):
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {"chat_id": chat_id, "text": text}
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            await client.post(url, json=payload)
+    except Exception:
+        # لا نوقف الطلب في حال فشل الإشعار
+        pass
+
 class Subject(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
