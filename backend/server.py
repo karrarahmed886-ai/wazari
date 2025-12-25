@@ -301,10 +301,10 @@ async def create_order(order_data: OrderCreateFlex):
     return order.dict()  # response as JSON
 
 @api_router.get("/orders")
-async def get_orders(status: Optional[str] = None):
+async def get_orders(order_status: Optional[str] = None):
     query = {}
-    if status:
-        query["status"] = status
+    if order_status:
+        query["status"] = order_status
     
     orders = await db.orders.find(query).sort("created_at", -1).to_list(1000)
     return [Order(**order) for order in orders]
