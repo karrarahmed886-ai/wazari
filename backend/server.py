@@ -214,6 +214,9 @@ async def create_order_simple(data: dict):
             "confirmed_at": None,
         }
 
+        tg_token = os.environ.get("TELEGRAM_BOT_TOKEN") or ""
+        tg_chat = os.environ.get("TELEGRAM_CHAT_ID") or ""
+
         await db.orders.insert_one(order)
 
         # Telegram notify (best-effort)
