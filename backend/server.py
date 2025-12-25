@@ -184,6 +184,16 @@ async def create_order_simple(data: dict):
 
         # Build order dict
         order = {
+
+async def send_telegram_message(token: str, chat_id: str, text: str):
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {"chat_id": chat_id, "text": text}
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            await client.post(url, json=payload)
+    except Exception:
+        pass
+
             "id": str(uuid.uuid4()),
             "student_name": student_name,
             "telegram_username": telegram_username,
