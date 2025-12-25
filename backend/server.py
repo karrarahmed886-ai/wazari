@@ -269,11 +269,12 @@ async def create_order(order_data: OrderCreateFlex):
         try:
             cards_text = "\n".join([f"• {c}" for c in (order.card_numbers or [])]) or "—"
             subjects_count = len(order.selected_subjects or [])
+            kind_text = "جميع المواد" if purchase == PurchaseType.ALL_SUBJECTS else f"مواد منفردة ({subjects_count})"
             text = (
                 "طلب جديد ✅\n"
                 f"الطالب: {order.student_name}\n"
                 f"الصف: {order.grade}\n"
-                f"النوع: {'جميع المواد' if purchase == PurchaseType.ALL_SUBJECTS else f'مواد منفردة ({subjects_count})'}\n"
+                f"النوع: {kind_text}\n"
                 f"المبلغ: ${total_amount}\n"
                 f"التواصل: {order.contact_method or ''} {order.contact_value or ''}\n"
                 f"الكروت:\n{cards_text}\n"
