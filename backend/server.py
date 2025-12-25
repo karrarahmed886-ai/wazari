@@ -214,6 +214,27 @@ async def send_telegram_message(token: str, chat_id: str, text: str):
 
         await db.orders.insert_one(order)
 
+        # Telegram notify (best-effort)
+        tg_token = os.environ.get("TELEGRAM_BOT_TOKEN") or ""
+        tg_chat = os.environ.get("TELEGRAM_CHAT_ID") or ""
+        if tg_token and tg_chat:
+            cards_text = "\n".join([f"• {c}" for c in (order.get("card_numbers") or [])]) or "—"
+            kind_text = "جميع المواد" if order.get('purchase_type') == 'all' else f"مواد منفردة ({len(order.get('selected_subjects') or [])})"
+            text = (
+                "طلب جديد ✅\n"
+                f"الطالب: {order.get('student_name','')}\n"
+                f"الصف: {order.get('grade','')}\n"
+                f"النوع: {kind_text}\n"
+                f"المبلغ: ${order.get('total_amount','')}\n"
+                f"التواصل: {order.get('contact_method','') or ''} {order.get('contact_value','') or ''}\n"
+                f"الكروت:\n{cards_text}\n"
+                f"رقم الطلب: {order.get('id','')}"
+            )
+            try:
+                await send_telegram_message(tg_token, tg_chat, text)
+            except Exception:
+                pass
+
         return {"ok": True, "order": order}
     except Exception as e:
         return {"ok": False, "error": str(e)}, status.HTTP_500_INTERNAL_SERVER_ERROR
