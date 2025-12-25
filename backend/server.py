@@ -268,6 +268,14 @@ async def create_order(order_data: OrderCreateFlex):
         client_key=getattr(order_data, 'client_key', None),
         grade=GradeType(order_data.grade),
         purchase_type=purchase,
+        selected_subjects=selected_subjects,
+        card_numbers=cards,
+        total_amount=total_amount
+    )
+
+    # Save order
+    await db.orders.insert_one(order.dict())
+
     # Telegram notify (best-effort)
     tg_token = os.environ.get("TELEGRAM_BOT_TOKEN") or ""
     tg_chat = os.environ.get("TELEGRAM_CHAT_ID") or ""
@@ -289,16 +297,6 @@ async def create_order(order_data: OrderCreateFlex):
             await send_telegram_message(tg_token, tg_chat, text)
         except Exception:
             pass
-
-        selected_subjects=selected_subjects,
-        card_numbers=cards,
-        total_amount=total_amount
-    )
-
-    # Save order
-    await db.orders.insert_one(order.dict())
-
-    # Telegram sending removed per request
 
     return order.dict()  # response as JSON
 
