@@ -223,9 +223,13 @@ function App() {
     };
   }, []);
 
+  // GitHub Pages: المسار الفرعي /wazari/ — يُضبط تلقائياً من base في Vite
+  const routerBasename =
+    import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '');
+
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={routerBasename}>
         <div className="font-sans text-gray-900 dark:text-white transition-colors duration-300 min-h-screen">
           <AppContent darkMode={darkMode} setDarkMode={setDarkMode} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         </div>

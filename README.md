@@ -69,6 +69,26 @@ git push -u origin main
 
 ---
 
+## GitHub Pages — ليش يظهر README مو الموقع؟
+
+الرابط `username.github.io/wazari/` يعرض **ملفات جاهزة (HTML/CSS/JS)** من مجلد النشر. إذا ضبطت Pages على **فرع بدون build**، GitHub يعرض **README** من جذر المشروع.
+
+لعرض **تطبيق React** الحقيقي:
+
+1. في المستودع: **Settings → Pages**  
+2. **Build and deployment → Source**: اختر **GitHub Actions** (ليس Deploy from a branch على الجذر فقط).
+3. ادفع التغييرات؛ سيعمل workflow الملف `.github/workflows/deploy-github-pages.yml` فيبني `frontend` ويرفع `dist`.
+4. في **Settings → Secrets and variables → Actions** أضف نفس متغيرات `VITE_*` الموجودة في `.env` حتى يعمل Supabase والبوت بعد النشر:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_TELEGRAM_BOT_TOKEN`
+   - `VITE_TELEGRAM_CHAT_ID`
+
+> إذا **غيّرت اسم المستودع** عن `wazari`، عدّل في ملف الـ workflow القيمة `VITE_BASE_URL: /wazari/` إلى `/اسم-المستودع-الجديد/` (مع الشرطتين `/` في البداية والنهاية).
+
+---
+
 ## أمان
 
 - ملفات `.env` مُستبعدة في `.gitignore` — لا تشارك مفاتيح Supabase أو Telegram في المستودع العام.
+- أسرار النشر على GitHub تُخزَّن كـ **Repository secrets** (ما تظهر في الكود).
