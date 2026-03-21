@@ -1,0 +1,17 @@
+{
+  "name": "wazari-asiacell-automation",
+  "version": "1.0.0",
+  "description": "Appium automation for Asiacell payment flow",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "node server.js",
+    "login": "node scripts/login.js",
+    "transfer": "node scripts/transfer.js"
+  },
+  "dependencies": {
+    "webdriverio": "^8.36.0",
+    "express": "^4.21.0"
+  }
+}
