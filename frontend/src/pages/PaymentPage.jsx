@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ShieldCheck, User, TelegramLogo, WhatsappLogo, ChatCircleDots, SimCard, Plus, X, Check } from '@phosphor-icons/react';
 import { v4 as uuidv4 } from 'uuid';
-import { supabase } from '@/lib/supabase';
+import { supabase, supabaseConfigured } from '@/lib/supabase';
 import AppleEmoji from '@/components/ui/AppleEmoji';
 import { gradeSubjects } from '@/data/grades';
 import { usePrices } from '@/hooks/usePrices';
@@ -144,6 +144,13 @@ const PaymentPage = () => {
   };
 
   const handleSubmit = async () => {
+    if (!supabaseConfigured) {
+      alert(
+        'إعدادات قاعدة البيانات غير مكتملة على الخادم.\nأضف VITE_SUPABASE_URL و VITE_SUPABASE_ANON_KEY في Secrets الخاصة بـ GitHub Actions ثم أعد نشر الموقع.'
+      );
+      return;
+    }
+
     setIsSubmitting(true);
 
     const orderId = "ORD-" + uuidv4().split('-')[0].toUpperCase();
@@ -177,24 +184,32 @@ ${cardsText}
     });
 
     if (insertError) {
-      console.error("Error saving order to Supabase:", insertError);
-      alert("تعذر حفظ الطلب. يرجى المحاولة مرة أخرى.");
+      console.error('Error saving order to Supabase:', insertError);
+      const reason = insertError?.message || insertError?.code || '';
+      alert(
+        `تعذر حفظ الطلب.\n\n${reason ? `التفاصيل: ${reason}\n\n` : ''}` +
+          'تحقق من: (1) إضافة أسرار Supabase في GitHub Actions وإعادة النشر (2) سياسات RLS لجدول orders تسمح بالـ INSERT للدور anon (3) تشغيل supabase-schema.sql في SQL Editor إن لم تكن الجداول جاهزة.'
+      );
       setIsSubmitting(false);
       return;
     }
 
-    // 2) Send Telegram directly from frontend (legacy flow)
+    // 2) تلغرام من المتصفح: JSON يفشل بسبب CORS → نرسل كـ form + no-cors
     const telegramToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
     const telegramChatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
     if (telegramToken && telegramChatId) {
       try {
+        const params = new URLSearchParams();
+        params.set('chat_id', String(telegramChatId));
+        params.set('text', message);
         await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: telegramChatId, text: message }),
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
         });
       } catch (notifyErr) {
-        console.error("Telegram send failed:", notifyErr);
+        console.error('Telegram send failed:', notifyErr);
       }
     }
 

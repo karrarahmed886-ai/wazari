@@ -1,4 +1,5 @@
 import React from 'react';
+import { publicUrl } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
 const LoadingScreen = ({ message }) => (
@@ -13,7 +14,7 @@ const LoadingScreen = ({ message }) => (
       transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       className="w-28 h-28 mb-8 rounded-full overflow-hidden border-4 border-primary/40 shadow-2xl shadow-primary/30"
     >
-      <img src="/logo.png" alt="منصة وزاري" className="w-full h-full object-cover" />
+      <img src={publicUrl('logo.png')} alt="منصة وزاري" className="w-full h-full object-cover" />
     </motion.div>
 
     <div className="relative mb-8 flex items-center justify-center">

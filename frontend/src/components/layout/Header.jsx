@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { List } from '@phosphor-icons/react';
 import { ThemeToggle } from '../ui/theme-toggle';
+import { publicUrl } from '@/lib/utils';
 
 const Header = ({ darkMode, toggleDarkMode, toggleSidebar }) => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const Header = ({ darkMode, toggleDarkMode, toggleSidebar }) => {
   const [ripples, setRipples] = useState([]);
 
   const handleLogoClick = () => {
-    window.location.href = '/';
+    navigate('/');
   };
 
   const [lastRipple, setLastRipple] = useState(0);
@@ -35,7 +36,7 @@ const Header = ({ darkMode, toggleDarkMode, toggleSidebar }) => {
 
         <div className="flex items-center gap-3 cursor-pointer" onClick={handleLogoClick}>
           <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-success/30 shadow-lg shadow-success/20 flex-shrink-0">
-            <img src="/logo.png" alt="منصة وزاري" className="w-full h-full object-cover" />
+            <img src={publicUrl('logo.png')} alt="منصة وزاري" className="w-full h-full object-cover" />
           </div>
           <div className="text-right flex flex-col justify-center">
             <h1 className="text-xl md:text-2xl font-head font-bold text-gray-900 dark:text-white tracking-wide">منصة وزاري</h1>
