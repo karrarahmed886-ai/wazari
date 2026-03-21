@@ -78,7 +78,7 @@ git push -u origin main
 1. في المستودع: **Settings → Pages**  
 2. **Build and deployment → Source**: اختر **GitHub Actions** (ليس Deploy from a branch على الجذر فقط).
 3. ادفع التغييرات؛ سيعمل workflow الملف `.github/workflows/deploy-github-pages.yml` فيبني `frontend` ويرفع `dist`.
-4. في **Settings → Secrets and variables → Actions** أضف نفس متغيرات `VITE_*` الموجودة في `.env` حتى يعمل Supabase والبوت بعد النشر:
+4. في **Settings → Secrets and variables → Actions** أضف نفس متغيرات `VITE_*` الموجودة في `.env` حتى يعمل Supabase والبوت بعد النشر (بدونها الموقع يفتح لكن **الأسعار والطلبات والدخول للأدمن** ما تشتغل لأنها مربوطة بـ Supabase):
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
    - `VITE_TELEGRAM_BOT_TOKEN`

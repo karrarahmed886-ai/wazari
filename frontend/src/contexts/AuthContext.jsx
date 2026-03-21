@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase, supabaseConfigured } from '@/lib/supabase';
 
 const AuthContext = createContext(null);
 
@@ -9,12 +9,27 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session?.user?.email) await checkAdmin(session.user.email);
-      else setIsAdmin(false);
+    if (!supabaseConfigured) {
+      setUser(null);
+      setIsAdmin(false);
       setLoading(false);
-    });
+      return;
+    }
+
+    supabase.auth
+      .getSession()
+      .then(async ({ data: { session } }) => {
+        setUser(session?.user ?? null);
+        if (session?.user?.email) await checkAdmin(session.user.email);
+        else setIsAdmin(false);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Auth getSession:', err);
+        setUser(null);
+        setIsAdmin(false);
+        setLoading(false);
+      });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setLoading(true);
