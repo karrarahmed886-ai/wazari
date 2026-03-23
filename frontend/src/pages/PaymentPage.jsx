@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ShieldCheck, User, TelegramLogo, WhatsappLogo, ChatCircleDots, SimCard, Plus, X, Check } from '@phosphor-icons/react';
 import { v4 as uuidv4 } from 'uuid';
@@ -454,7 +454,7 @@ ${cardsText}
                   <Check weight="bold" className="absolute text-white opacity-0 peer-checked:opacity-100 w-3.5 h-3.5 pointer-events-none transition-opacity" />
                 </div>
                 <span className="text-sm text-gray-600 dark:text-gray-400 font-medium leading-relaxed select-none">
-                  لقد قرأت ووافقت على <a href="/privacy" target="_blank" className="text-primary hover:underline">سياسة الخصوصية</a>، و <a href="/terms" target="_blank" className="text-primary hover:underline">شروط الاستخدام</a>، و <a href="/refund" target="_blank" className="text-primary hover:underline">سياسة التعويض</a>.
+                  لقد قرأت ووافقت على <Link to="/privacy" target="_blank" className="text-primary hover:underline">سياسة الخصوصية</Link>، و <Link to="/terms" target="_blank" className="text-primary hover:underline">شروط الاستخدام</Link>، و <Link to="/refund" target="_blank" className="text-primary hover:underline">سياسة التعويض</Link>.
                 </span>
               </label>
             </div>
